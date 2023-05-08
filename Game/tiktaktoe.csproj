@@ -4,16 +4,15 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <None Include="**/*.tscn" />
+    <AllProjects Include="**/*.tscn" />
+    <AllProjects Include="**/*.godot" />
   </ItemGroup>
-
   <ItemGroup>
+    <PackageReference Include="Chickensoft.GoDotLog" Version="1.1.2" />
+    <PackageReference Include="Chickensoft.GoDotNet" Version="1.5.3" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.39.0" />
     <PackageReference Include="LanguageExt.Core" Version="4.4.3" />
-    <PackageReference Include="LanguageExt.Rx" Version="4.4.3" />
-    <PackageReference Include="LanguageExt.SysX" Version="4.4.3" />
-    <PackageReference Include="LanguageExt.Transformers" Version="4.4.3" />
     <PackageReference Include="NakamaClient" Version="3.7.0" />
   </ItemGroup>
 </Project>

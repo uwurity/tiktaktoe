@@ -16,7 +16,7 @@ public static class AuthExtensions
     }
 
     public static async Task<Either<SignupState, ISession>> TrySignup(
-        this Client client,
+        this IClient client,
         string email,
         string password,
         string? username = null

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://1f75msbol02"]
+
+[ext_resource type="Script" path="res://src/Settings/SettingsScene.cs" id="1_j3qt0"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_j3qt0")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 520.0
+offset_top = 98.0
+offset_right = 650.0
+offset_bottom = 124.0
+text = "Settings scene"

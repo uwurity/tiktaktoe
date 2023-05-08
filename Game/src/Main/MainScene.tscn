@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://chfiule5llh4w"]
+
+[ext_resource type="Script" path="res://src/Main/MainScene.cs" id="1_bhtee"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_bhtee")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 454.0
+offset_top = 117.0
+offset_right = 704.0
+offset_bottom = 222.0
+text = "tiktaktoe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClassicButton" type="Button" parent="."]
+offset_left = 72.0
+offset_top = 371.0
+offset_right = 250.0
+offset_bottom = 420.0
+text = "Classic"
+
+[node name="AdventureButton" type="Button" parent="."]
+offset_left = 72.0
+offset_top = 466.0
+offset_right = 250.0
+offset_bottom = 515.0
+text = "Adventure"
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 72.0
+offset_top = 568.0
+offset_right = 250.0
+offset_bottom = 617.0
+text = "Settings"
+
+[connection signal="pressed" from="ClassicButton" to="." method="OnClassicButton_pressed"]
+[connection signal="pressed" from="AdventureButton" to="." method="OnAdventureButton_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButton_pressed"]
