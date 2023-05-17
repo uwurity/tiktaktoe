@@ -1,38 +1,46 @@
+using Chickensoft.AutoInject;
 using Chickensoft.GoDotLog;
-using Chickensoft.GoDotNet;
 using CSharpFunctionalExtensions;
 using Godot;
-using tiktaktoe.Shared.NakamaHelpers;
-using tiktaktoe.Shared.Autoloads;
+using Nakama;
+using SuperNodes.Types;
+using tiktaktoe.Shared.Auth;
 
 namespace tiktaktoe.Adventure;
 
+[SuperNode(typeof(Dependent))]
 public partial class AdventureScene : CanvasLayer
 {
-    private readonly ILog _log = new GDLog(nameof(AdventureScene));
-    
-    private ClientNode ClientNode => this.Autoload<ClientNode>();
-    
-    // Called when the node enters the scene tree for the first time.
-    public override async void _Ready()
-    {
-        const string email = "super@he.com";
-        const string password = "batsignal";
-        const string username = "hith";
+	public override partial void _Notification(int what);
+	
+	private readonly ILog _log = new GDLog(nameof(AdventureScene));
+	
+	[Dependency]
+	private IClient Client => DependOn<IClient>();
+	
+	public async void OnResolved()
+	{
+		// All of my dependencies are now available! Do whatever you want with 
+		// them here.
+		const string email = "super@heros.com";
+		const string password = "batsignal";
+		const string username = "hith";
 
-        await ClientNode.Client.Execute(async client =>
-        {
-            var signupResult = await client.TrySignup(email, password, username);
+		var signupResult = await Client.TrySignup(email, password, username);
 
-            signupResult.Match(
-                session => _log.Print(session?.ToString() ?? ""),
-                state => _log.Warn(state.ToString())
-            );
-        });
-    }
+		signupResult.Session.Match(
+			session => _log.Print(session.ToString() ?? ""),
+			() => _log.Warn(signupResult.ToString())
+		);
+	}
+	
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
 }

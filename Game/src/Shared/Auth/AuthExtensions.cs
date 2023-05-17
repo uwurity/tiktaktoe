@@ -1,21 +1,12 @@
 ﻿using System.Threading.Tasks;
-using LanguageExt;
-using static LanguageExt.Prelude;
+using CSharpFunctionalExtensions;
 using Nakama;
 
-namespace tiktaktoe.Shared.NakamaHelpers;
+namespace tiktaktoe.Shared.Auth;
 
 public static class AuthExtensions
 {
-    public enum SignupState
-    {
-        Exists,
-        UsernameUsed,
-        EmailUsed,
-        Undefined
-    }
-
-    public static async Task<Either<SignupState, ISession>> TrySignup(
+    public static async Task<SignupResult> TrySignup(
         this IClient client,
         string email,
         string password,
@@ -26,7 +17,7 @@ public static class AuthExtensions
         {
             var session = await client.AuthenticateEmailAsync(email, password, username, create: false);
             await client.SessionLogoutAsync(session);
-            return Left(SignupState.Exists);
+            return new(SignupState.Exists);
         }
         catch (ApiResponseException e)
         {
@@ -37,21 +28,21 @@ public static class AuthExtensions
                     try
                     {
                         var session = await client.AuthenticateEmailAsync(email, password, username, create: true);
-                        return Right(session);
+                        return new(Maybe.From(session));
                     }
                     catch (ApiResponseException registerException)
                     {
                         if (registerException.GrpcStatusCode == 6)
-                            return Left(SignupState.UsernameUsed);
+                            return new(SignupState.UsernameUsed);
                     }
                     break;
 
                 // Invalid credentials.
                 case 16:
-                    return Left(SignupState.EmailUsed);
+                    return new(SignupState.EmailUsed);
             }
         }
 
-        return Left(SignupState.Undefined);
+        return new(SignupState.Undefined);
     }
 }
