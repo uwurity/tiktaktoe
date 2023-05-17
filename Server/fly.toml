@@ -1,0 +1,95 @@
+# fly.toml app configuration file generated for dry-water-5646 on 2023-05-13T23:22:45+07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+# See https://heroiclabs.com/docs/nakama/getting-started/configuration/#server-ports for Nakama server ports.
+
+app = "dry-water-5646"
+primary_region = "sin"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[experimental]
+  auto_rollback = true
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PRIMARY_REGION = "sin"
+
+[[mounts]]
+  source = "nakama_machines"
+  destination = "/nakama/data"
+  processes = ["app"]
+
+# Admin dashboard
+[[services]]
+  protocol = "tcp"
+  internal_port = 7351
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
+    grace_period = "5s"
+    restart_limit = 0
+    method = "get"
+    path = "/"
+    protocol = "http"
+
+# gRPC API endpoint
+[[services]]
+  protocol = "tcp"
+  internal_port = 7349
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 7349
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+# HTTP API endpoint
+[[services]]
+  protocol = "tcp"
+  internal_port = 7350
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 7350
+    handlers = ["tls"]
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
+    grace_period = "5s"
+    restart_limit = 0
+    method = "get"
+    path = "/"
+    tls_skip_verify = true
+    protocol = "https"
+
+# Prometheus / Grafana
+[metrics]
+  port = 9091
+  path = "/metrics"
