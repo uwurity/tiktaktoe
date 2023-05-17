@@ -12,9 +12,11 @@ public partial class GameScene : Node, IProvide<IClient> {
 	private const int Port = 7350;
 	private const string ServerKey = "defaultkey";
 
+	private IClient? _client;
+
 	public override partial void _Notification(int what);
 
-	IClient IProvide<IClient>.Value() => new Client(Scheme, Host, Port, ServerKey);
+	IClient IProvide<IClient>.Value() => _client ??= new Client(Scheme, Host, Port, ServerKey);
 
 	// Call the Provide() method once your dependencies have been initialized.
 	private void OnReady() => Provide();
