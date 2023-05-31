@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfrhl32yovc7x"]
+
+[ext_resource type="Script" path="res://src/Main/Adventure/AdventureScene.cs" id="1_8v2i6"]
+
+[node name="AdventureScene" type="Node2D"]
+script = ExtResource("1_8v2i6")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 505.0
+offset_top = 152.0
+offset_right = 635.0
+offset_bottom = 178.0
+text = "Adventure scene"
