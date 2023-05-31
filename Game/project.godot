@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="tiktaktoe"
-run/main_scene="res://src/Game/GameScene.tscn"
+run/main_scene="res://src/Main/MainScene.tscn"
 config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Online="*res://src/Autoload/Online.cs"
 
 [dotnet]
 

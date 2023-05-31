@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1saaw5v4mgy0"]
-
-[ext_resource type="Script" path="res://src/Game/GameScene.cs" id="1_36w4e"]
-[ext_resource type="PackedScene" uid="uid://chfiule5llh4w" path="res://src/Main/MainScene.tscn" id="2_l6veb"]
-
-[node name="GameScene" type="Node"]
-script = ExtResource("1_36w4e")
-
-[node name="CanvasLayer" parent="." instance=ExtResource("2_l6veb")]
