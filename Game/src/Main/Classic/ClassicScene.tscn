@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://src/Main/Classic/ClassicScene.cs" id="1_isyfl"]
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_f5lt4"]
 
-[node name="ClassicScene" type="Node2D"]
+[node name="ClassicScene" type="Node2D" node_paths=PackedStringArray("PvpButton")]
 script = ExtResource("1_isyfl")
-Description = "Just some good ol' Tiktaktoe"
+PvpButton = NodePath("PvpButton")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 531.0
@@ -30,7 +30,7 @@ offset_right = 658.0
 offset_bottom = 209.0
 text = "PVE"
 script = ExtResource("2_f5lt4")
-Scene = "PlayScene"
+Scene = "ClassicPlayScene"
 
 [node name="PvpButton" type="Button" parent="."]
 offset_left = 505.0

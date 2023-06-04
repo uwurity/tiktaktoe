@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://src/Main/MainScene.cs" id="1_bhtee"]
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_37sah"]
 
-[node name="MainScene" type="Node2D"]
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("AdventureButton")]
 script = ExtResource("1_bhtee")
+AdventureButton = NodePath("AdventureButton")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 454.0
@@ -43,5 +44,5 @@ script = ExtResource("2_37sah")
 Scene = "SettingsScene"
 
 [connection signal="pressed" from="ClassicButton" to="ClassicButton" method="OnPressed"]
-[connection signal="pressed" from="AdventureButton" to="AdventureButton" method="OnPressed"]
+[connection signal="pressed" from="AdventureButton" to="." method="OnAdventureButton_pressed"]
 [connection signal="pressed" from="SettingsButton" to="SettingsButton" method="OnPressed"]
