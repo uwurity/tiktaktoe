@@ -1,3 +1,60 @@
-[gd_scene format=3 uid="uid://bv3k8eyn1ullw"]
+[gd_scene load_steps=3 format=3 uid="uid://bv3k8eyn1ullw"]
 
-[node name="JoinRoomScene" type="Node2D"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_uxg8b"]
+[ext_resource type="Script" path="res://src/Main/JoinRoom/JoinRoomScene.cs" id="1_yiy2t"]
+
+[node name="JoinRoomScene" type="Node2D" node_paths=PackedStringArray("MatchDescription", "JoinButton", "JoinCode")]
+script = ExtResource("1_yiy2t")
+MatchDescription = NodePath("MatchDescription")
+JoinButton = NodePath("JoinButton")
+JoinCode = NodePath("JoinCode")
+
+[node name="MatchDescription" type="Label" parent="."]
+offset_left = 343.0
+offset_top = 99.0
+offset_right = 849.0
+offset_bottom = 130.0
+text = "Join Room"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 464.0
+offset_top = 167.0
+offset_right = 724.0
+offset_bottom = 220.0
+text = "Join or create a room"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JoinCode" type="SpinBox" parent="."]
+offset_left = 489.0
+offset_top = 244.0
+offset_right = 708.0
+offset_bottom = 283.0
+min_value = 100000.0
+max_value = 999999.0
+value = 100000.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="JoinButton" type="Button" parent="."]
+offset_left = 550.0
+offset_top = 318.0
+offset_right = 631.0
+offset_bottom = 350.0
+text = "Join"
+script = ExtResource("1_uxg8b")
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 51.0
+offset_top = 585.0
+offset_right = 189.0
+offset_bottom = 619.0
+text = "Back"
+script = ExtResource("1_uxg8b")
+Scene = "back"
+
+[connection signal="value_changed" from="JoinCode" to="." method="OnJoinCode_value_changed"]
+[connection signal="pressed" from="JoinButton" to="." method="OnJoinButton_pressed"]
+[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]

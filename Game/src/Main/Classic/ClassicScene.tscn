@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp1iekitxtics"]
+[gd_scene load_steps=3 format=3 uid="uid://bp1iekitxtics"]
 
 [ext_resource type="Script" path="res://src/Main/Classic/ClassicScene.cs" id="1_isyfl"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_f5lt4"]
 
 [node name="ClassicScene" type="Node2D"]
 script = ExtResource("1_isyfl")
+Description = "Just some good ol' Tiktaktoe"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 531.0
@@ -11,3 +13,34 @@ offset_top = 104.0
 offset_right = 632.0
 offset_bottom = 130.0
 text = "Classic scene"
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 63.0
+offset_top = 565.0
+offset_right = 210.0
+offset_bottom = 603.0
+text = "Back"
+script = ExtResource("2_f5lt4")
+Scene = "back"
+
+[node name="PveButton" type="Button" parent="."]
+offset_left = 504.0
+offset_top = 175.0
+offset_right = 658.0
+offset_bottom = 209.0
+text = "PVE"
+script = ExtResource("2_f5lt4")
+Scene = "PlayScene"
+
+[node name="PvpButton" type="Button" parent="."]
+offset_left = 505.0
+offset_top = 236.0
+offset_right = 658.0
+offset_bottom = 268.0
+text = "PVP"
+script = ExtResource("2_f5lt4")
+Scene = "JoinRoomScene"
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]
+[connection signal="pressed" from="PveButton" to="PveButton" method="OnPressed"]
+[connection signal="pressed" from="PvpButton" to="." method="OnPvpButton_pressed"]

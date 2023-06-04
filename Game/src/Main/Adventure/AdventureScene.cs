@@ -9,31 +9,24 @@ namespace tiktaktoe.Main.Adventure;
 
 public partial class AdventureScene : Node2D
 {
-    private readonly ILog _log = new GDLog(nameof(AdventureScene));
+	[Export]
+	private string? Description;
 	
-    private Online Online => this.Autoload<Online>();
+	[Export]
+	public Label SceneDescription;
 
-    public override async void _Ready()
-    {
-        const string email = "super@heros.com";
-        const string password = "batsignal";
-        const string username = "hith";
+	private readonly ILog _log = new GDLog(nameof(AdventureScene));
 
-        await Online.Execute(async client =>
-        {
-            var signupResult = await client.TrySignup(email, password, username);
-            signupResult.Session.Match(
-                session =>
-                {
-                    _log.Print(session.ToString() ?? "");
-                    Online.Session = session;
-                },
-                () => _log.Warn(signupResult.ToString())
-            );
-        });
-    }
+	private MatchState _matchState => this.Autoload<MatchState>();
 
-    public override void _Process(double delta)
-    {
-    }
+	public override void _Ready()
+	{
+		_matchState.Level = nameof(AdventureScene);
+		_matchState.Description = Description;
+		SceneDescription.Text = Description;
+	}
+
+	public override void _Process(double delta)
+	{
+	}
 }

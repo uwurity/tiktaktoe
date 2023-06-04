@@ -1,3 +1,52 @@
-[gd_scene format=3 uid="uid://d0ayut2t7flri"]
+[gd_scene load_steps=3 format=3 uid="uid://d0ayut2t7flri"]
 
-[node name="LobbyScene" type="Node2D"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_ohk3p"]
+[ext_resource type="Script" path="res://src/Main/Lobby/LobbyScene.cs" id="1_uxm4b"]
+
+[node name="LobbyScene" type="Node2D" node_paths=PackedStringArray("JoinCode")]
+script = ExtResource("1_uxm4b")
+JoinCode = NodePath("JoinCode")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 537.0
+offset_top = 95.0
+offset_right = 610.0
+offset_bottom = 121.0
+text = "Join Code"
+
+[node name="JoinCode" type="Label" parent="."]
+offset_left = 544.0
+offset_top = 129.0
+offset_right = 599.0
+offset_bottom = 155.0
+text = "000000"
+
+[node name="State" type="Label" parent="."]
+offset_left = 444.0
+offset_top = 505.0
+offset_right = 704.0
+offset_bottom = 561.0
+text = "Waiting for players (1/4)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 32.0
+offset_top = 590.0
+offset_right = 151.0
+offset_bottom = 624.0
+text = "Back"
+script = ExtResource("1_ohk3p")
+Scene = "back"
+
+[node name="DemoPlayButton" type="Button" parent="."]
+offset_left = 938.0
+offset_top = 576.0
+offset_right = 1112.0
+offset_bottom = 613.0
+text = "(Demo) Go to Play"
+script = ExtResource("1_ohk3p")
+Scene = "PlayScene"
+
+[connection signal="pressed" from="BackButton" to="." method="OnBackButton_pressed"]
+[connection signal="pressed" from="DemoPlayButton" to="DemoPlayButton" method="OnPressed"]

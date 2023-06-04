@@ -1,13 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfrhl32yovc7x"]
+[gd_scene load_steps=3 format=3 uid="uid://dfrhl32yovc7x"]
 
 [ext_resource type="Script" path="res://src/Main/Adventure/AdventureScene.cs" id="1_8v2i6"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_oppmj"]
 
-[node name="AdventureScene" type="Node2D"]
+[node name="AdventureScene" type="Node2D" node_paths=PackedStringArray("SceneDescription")]
 script = ExtResource("1_8v2i6")
+Description = "Adventuring with friends!"
+SceneDescription = NodePath("SceneDescription")
+
+[node name="SceneDescription" type="Label" parent="."]
+offset_left = 373.0
+offset_top = 110.0
+offset_right = 789.0
+offset_bottom = 136.0
+text = "Adventure scene"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 58.0
+offset_top = 574.0
+offset_right = 227.0
+offset_bottom = 614.0
+text = "Back"
+script = ExtResource("2_oppmj")
+Scene = "back"
+
+[node name="DemoPlayButton" type="Button" parent="."]
+offset_left = 938.0
+offset_top = 576.0
+offset_right = 1112.0
+offset_bottom = 613.0
+text = "(Demo) Go to Play"
+script = ExtResource("2_oppmj")
+Scene = "PlayScene"
 
 [node name="Label" type="Label" parent="."]
-offset_left = 505.0
-offset_top = 152.0
-offset_right = 635.0
-offset_bottom = 178.0
-text = "Adventure scene"
+offset_left = 320.0
+offset_top = 208.0
+offset_right = 834.0
+offset_bottom = 524.0
+text = "Configure an Adventure room here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]
+[connection signal="pressed" from="DemoPlayButton" to="DemoPlayButton" method="OnPressed"]
