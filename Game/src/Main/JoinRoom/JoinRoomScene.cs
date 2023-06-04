@@ -10,21 +10,21 @@ namespace tiktaktoe.Main.JoinRoom;
 
 public partial class JoinRoomScene : Node2D
 {
-	[Export]
-	public Label MatchDescription { get; set; }
-	
-	[Export]
-	public SceneHandler JoinButton { get; set; }
-	
-	[Export]
-	public SpinBox JoinCode { get; set; }
+	[Export] public Label MatchDescription { get; set; } = null!;
+	[Export] public SceneHandler JoinButton { get; set; } = null!;
+	[Export] public SpinBox JoinCode { get; set; } = null!;
 
-	private MatchState _matchState => this.Autoload<MatchState>();
+	private Global Global => this.Autoload<Global>();
+	private MatchState MatchState => this.Autoload<MatchState>();
 
 	public override void _Ready()
 	{
-		MatchDescription.Text = _matchState.Description;
-		GD.Randomize();
+		MatchDescription.Text = MatchState.Level switch
+		{
+			nameof(ClassicScene) => "Just some good ol' Tiktaktoe",
+			nameof(AdventureScene) => "Adventuring with friends!",
+			_ => "",
+		};
 	}
 
 	public override void _Process(double delta)
@@ -33,11 +33,18 @@ public partial class JoinRoomScene : Node2D
 	
 	private void OnJoinButton_pressed()
 	{
-		// this is only for demoing
-		_matchState.JoinCode = (int) JoinCode.Value;
-		JoinButton.Scene = nameof(AdventureScene);
-		if (GetNode("/root/SceneManager").GetPreviousScene() == nameof(ClassicScene))
-			JoinButton.Scene = nameof(LobbyScene);
+		var matchExists = false;
+
+		var nextSceneIfMatchNotExists = MatchState.Level switch
+		{
+			nameof(ClassicScene) => nameof(LobbyScene),
+			_ => MatchState.Level,
+		};
+
+		MatchState.JoinCode = (int) JoinCode.Value;
+
+		JoinButton.Scene = matchExists ? nameof(LobbyScene) : nextSceneIfMatchNotExists;
+		
 		JoinButton.OnPressed();
 	}
 	

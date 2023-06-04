@@ -45,6 +45,7 @@ offset_right = 631.0
 offset_bottom = 350.0
 text = "Join"
 script = ExtResource("1_uxg8b")
+Scene = "LobbyScene"
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = 51.0

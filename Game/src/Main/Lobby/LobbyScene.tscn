@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_ohk3p"]
 [ext_resource type="Script" path="res://src/Main/Lobby/LobbyScene.cs" id="1_uxm4b"]
 
-[node name="LobbyScene" type="Node2D" node_paths=PackedStringArray("JoinCode")]
+[node name="LobbyScene" type="Node2D" node_paths=PackedStringArray("JoinCode", "BackButton", "DemoPlayButton")]
 script = ExtResource("1_uxm4b")
 JoinCode = NodePath("JoinCode")
+BackButton = NodePath("BackButton")
+DemoPlayButton = NodePath("DemoPlayButton")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 537.0
@@ -46,7 +48,6 @@ offset_right = 1112.0
 offset_bottom = 613.0
 text = "(Demo) Go to Play"
 script = ExtResource("1_ohk3p")
-Scene = "PlayScene"
 
 [connection signal="pressed" from="BackButton" to="." method="OnBackButton_pressed"]
-[connection signal="pressed" from="DemoPlayButton" to="DemoPlayButton" method="OnPressed"]
+[connection signal="pressed" from="DemoPlayButton" to="." method="OnDemoPlayButton_pressed"]

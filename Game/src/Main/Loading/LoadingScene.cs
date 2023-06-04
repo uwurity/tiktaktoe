@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace tiktaktoe.Main.Loading;
 
 public partial class LoadingScene : Node2D
 {
