@@ -8,10 +8,10 @@ namespace tiktaktoe.Main.Profile.ResetPassword;
 
 public partial class ResetPasswordScene : Node2D
 {
-	private Online Online => this.Autoload<Online>();
-	
 	[Export]
 	public LineEdit Email { get; set; }
+
+	private Online Online => this.Autoload<Online>();
 
 	public override void _Ready()
 	{

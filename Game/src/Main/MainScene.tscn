@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://chfiule5llh4w"]
+[gd_scene load_steps=3 format=3 uid="uid://chfiule5llh4w"]
 
 [ext_resource type="Script" path="res://src/Main/MainScene.cs" id="1_bhtee"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_37sah"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_bhtee")
@@ -20,6 +21,8 @@ offset_top = 371.0
 offset_right = 250.0
 offset_bottom = 420.0
 text = "Classic"
+script = ExtResource("2_37sah")
+Scene = "ClassicScene"
 
 [node name="AdventureButton" type="Button" parent="."]
 offset_left = 72.0
@@ -27,6 +30,8 @@ offset_top = 466.0
 offset_right = 250.0
 offset_bottom = 515.0
 text = "Adventure"
+script = ExtResource("2_37sah")
+Scene = "JoinRoomScene"
 
 [node name="SettingsButton" type="Button" parent="."]
 offset_left = 72.0
@@ -34,7 +39,9 @@ offset_top = 568.0
 offset_right = 250.0
 offset_bottom = 617.0
 text = "Settings"
+script = ExtResource("2_37sah")
+Scene = "SettingsScene"
 
-[connection signal="pressed" from="ClassicButton" to="." method="OnClassicButton_pressed"]
-[connection signal="pressed" from="AdventureButton" to="." method="OnAdventureButton_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButton_pressed"]
+[connection signal="pressed" from="ClassicButton" to="ClassicButton" method="OnPressed"]
+[connection signal="pressed" from="AdventureButton" to="AdventureButton" method="OnPressed"]
+[connection signal="pressed" from="SettingsButton" to="SettingsButton" method="OnPressed"]

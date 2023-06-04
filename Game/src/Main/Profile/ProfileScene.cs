@@ -6,8 +6,6 @@ namespace tiktaktoe.Main.Profile;
 
 public partial class ProfileScene : Node2D
 {
-	private Online Online => this.Autoload<Online>();
-	
 	[Export]
 	public Image Avatar { get; set; }
 
@@ -16,6 +14,8 @@ public partial class ProfileScene : Node2D
 	
 	[Export]
 	public Label Email { get; set; }
+
+	private Online Online => this.Autoload<Online>();
 
 	public override async void _Ready()
 	{

@@ -18,10 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 Online="*res://src/Autoload/Online.cs"
+SceneManager="*res://addons/scene_manager/scene_manager.tscn"
+Scenes="*res://addons/scene_manager/scenes.gd"
+MatchState="*res://src/Autoload/MatchState.cs"
 
 [dotnet]
 
 project/assembly_name="tiktaktoe"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
 
 [rendering]
 

@@ -12,6 +12,7 @@
   <ItemGroup>
     <AllProjects Include="**/*.tscn" />
     <AllProjects Include="**/*.godot" />
+    <AllProjects Include="**/*.gd" />
   </ItemGroup>
 
   <ItemGroup>
