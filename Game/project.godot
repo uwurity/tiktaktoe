@@ -17,10 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Global="*res://src/Autoload/Global.cs"
+MatchState="*res://src/Autoload/MatchState.cs"
 Online="*res://src/Autoload/Online.cs"
 SceneManager="*res://addons/scene_manager/scene_manager.tscn"
 Scenes="*res://addons/scene_manager/scenes.gd"
-MatchState="*res://src/Autoload/MatchState.cs"
 
 [dotnet]
 
