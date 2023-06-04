@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpv3176mdnuru"]
+
+[ext_resource type="Script" path="res://src/Main/Adventure/Play/AdventurePlayScene.cs" id="1_77lyy"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_h018x"]
+
+[sub_resource type="TileSet" id="TileSet_1lmyk"]
+tile_size = Vector2i(50, 50)
+
+[node name="AdventurePlayScene" type="Node2D" node_paths=PackedStringArray("BackButton")]
+script = ExtResource("1_77lyy")
+BackButton = NodePath("BackButton")
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 43.0
+offset_top = 33.0
+offset_right = 145.0
+offset_bottom = 77.0
+text = "Back"
+script = ExtResource("2_h018x")
+Scene = "MainScene"
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(795, 309)
+tile_set = SubResource("TileSet_1lmyk")
+format = 2
+
+[connection signal="pressed" from="BackButton" to="." method="OnBackButton_pressed"]
