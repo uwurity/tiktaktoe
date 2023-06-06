@@ -1,0 +1,18 @@
+default: watch
+
+type-check:
+    pnpm exec tsc --noEmit
+
+build: type-check
+    pnpm exec rollup -c
+
+start: build
+    nakama migrate up --database.address postgres:localdb@localhost:5432
+    nakama --runtime.js_entrypoint ./index.js --database.address postgres:localdb@localhost:5432
+
+watch:
+    watchexec -r -e ts -- just start
+
+deploy:
+    cat .env | fly secrets import --stage
+    fly deploy
