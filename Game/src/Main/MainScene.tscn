@@ -1,48 +1,111 @@
-[gd_scene load_steps=3 format=3 uid="uid://chfiule5llh4w"]
+[gd_scene load_steps=10 format=3 uid="uid://chfiule5llh4w"]
 
 [ext_resource type="Script" path="res://src/Main/MainScene.cs" id="1_bhtee"]
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_37sah"]
+[ext_resource type="Texture2D" uid="uid://bul7wka7iynwn" path="res://assets/3737136.png" id="2_fki7y"]
+[ext_resource type="FontFile" uid="uid://cxw8rt2sv0hx0" path="res://assets/RubikWetPaint-Regular.ttf" id="3_terox"]
+[ext_resource type="Texture2D" uid="uid://bysiynjd7xcjh" path="res://assets/TIKTAKTOE1x.png" id="5_rfex2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf16d"]
+bg_color = Color(0.929412, 0.698039, 0.290196, 1)
+border_width_left = 10
+border_width_bottom = 10
+border_color = Color(0.615686, 0.364706, 0.12549, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.752941, 0.643137, 0.443137, 1)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ty3ai"]
+bg_color = Color(0.85098, 0.623529, 0.203922, 1)
+border_width_left = 10
+border_width_bottom = 10
+border_color = Color(0.615686, 0.364706, 0.12549, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.752941, 0.643137, 0.443137, 1)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0mg1"]
+bg_color = Color(0.890196, 0.564706, 0.278431, 1)
+border_width_left = 10
+border_width_bottom = 10
+border_color = Color(0.615686, 0.364706, 0.12549, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.752941, 0.643137, 0.443137, 1)
+shadow_size = 5
+
+[sub_resource type="Theme" id="Theme_46cgj"]
+default_font = ExtResource("3_terox")
+Button/styles/hover = SubResource("StyleBoxFlat_xf16d")
+Button/styles/normal = SubResource("StyleBoxFlat_ty3ai")
+Button/styles/pressed = SubResource("StyleBoxFlat_n0mg1")
 
 [node name="MainScene" type="Node2D" node_paths=PackedStringArray("AdventureButton")]
 script = ExtResource("1_bhtee")
-AdventureButton = NodePath("AdventureButton")
+AdventureButton = NodePath("NinePatchRect/AdventureButton")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 454.0
-offset_top = 117.0
-offset_right = 704.0
-offset_bottom = 222.0
-text = "tiktaktoe"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 1146.0
+offset_bottom = 650.0
+texture = ExtResource("2_fki7y")
 
-[node name="ClassicButton" type="Button" parent="."]
-offset_left = 72.0
-offset_top = 371.0
-offset_right = 250.0
-offset_bottom = 420.0
+[node name="ClassicButton" type="Button" parent="NinePatchRect"]
+offset_left = 71.0
+offset_top = 214.0
+offset_right = 221.0
+offset_bottom = 254.0
+theme = SubResource("Theme_46cgj")
 text = "Classic"
 script = ExtResource("2_37sah")
 Scene = "ClassicScene"
 
-[node name="AdventureButton" type="Button" parent="."]
-offset_left = 72.0
-offset_top = 466.0
-offset_right = 250.0
-offset_bottom = 515.0
+[node name="AdventureButton" type="Button" parent="NinePatchRect"]
+offset_left = 73.0
+offset_top = 310.0
+offset_right = 223.0
+offset_bottom = 350.0
+theme = SubResource("Theme_46cgj")
 text = "Adventure"
 script = ExtResource("2_37sah")
 Scene = "JoinRoomScene"
 
-[node name="SettingsButton" type="Button" parent="."]
-offset_left = 72.0
-offset_top = 568.0
-offset_right = 250.0
-offset_bottom = 617.0
+[node name="SettingsButton" type="Button" parent="NinePatchRect"]
+offset_left = 914.0
+offset_top = 220.0
+offset_right = 1064.0
+offset_bottom = 260.0
+theme = SubResource("Theme_46cgj")
 text = "Settings"
 script = ExtResource("2_37sah")
 Scene = "SettingsScene"
 
-[connection signal="pressed" from="ClassicButton" to="ClassicButton" method="OnPressed"]
-[connection signal="pressed" from="AdventureButton" to="." method="OnAdventureButton_pressed"]
-[connection signal="pressed" from="SettingsButton" to="SettingsButton" method="OnPressed"]
+[node name="Button" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 917.0
+offset_top = 307.0
+offset_right = 1067.0
+offset_bottom = 347.0
+theme = SubResource("Theme_46cgj")
+text = "Credit"
+
+[node name="Tiktaktoe1x" type="Sprite2D" parent="."]
+position = Vector2(566, 94)
+scale = Vector2(0.417323, 0.417323)
+texture = ExtResource("5_rfex2")
+
+[connection signal="pressed" from="NinePatchRect/ClassicButton" to="NinePatchRect/ClassicButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/AdventureButton" to="." method="OnAdventureButton_pressed"]
+[connection signal="pressed" from="NinePatchRect/SettingsButton" to="NinePatchRect/SettingsButton" method="OnPressed"]
