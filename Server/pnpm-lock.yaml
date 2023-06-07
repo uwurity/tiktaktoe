@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   nakama-runtime:
     specifier: github:heroiclabs/nakama-common
     version: github.com/heroiclabs/nakama-common/03252a540ccf546faa3f72e4011ffe7e2e82dcd4
@@ -19,6 +22,9 @@ devDependencies:
   '@babel/preset-env':
     specifier: ^7.22.4
     version: 7.22.4(@babel/core@7.22.1)
+  '@optimize-lodash/rollup-plugin':
+    specifier: ^4.0.3
+    version: 4.0.3(rollup@2.79.1)
   '@rollup/plugin-babel':
     specifier: ^5.3.1
     version: 5.3.1(@babel/core@7.22.1)(rollup@2.79.1)
@@ -34,6 +40,9 @@ devDependencies:
   '@rollup/plugin-typescript':
     specifier: ^8.5.0
     version: 8.5.0(rollup@2.79.1)(tslib@2.5.3)(typescript@4.9.5)
+  '@types/lodash':
+    specifier: ^4.14.195
+    version: 4.14.195
   rollup:
     specifier: ^2.79.1
     version: 2.79.1
@@ -1310,6 +1319,25 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@optimize-lodash/rollup-plugin@4.0.3(rollup@2.79.1):
+    resolution: {integrity: sha512-zp9Yj8LL0QlUBXFmSI2EUI0phg9KvW9x1ZdsEhYuyxhNC1KiEUQR8ZEdH/GF8ZRPiKAL1fUJ8195wYlzhFsspA==}
+    engines: {node: '>= 12'}
+    peerDependencies:
+      rollup: '>=2.x'
+    dependencies:
+      '@optimize-lodash/transform': 3.0.2
+      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      rollup: 2.79.1
+    dev: true
+
+  /@optimize-lodash/transform@3.0.2:
+    resolution: {integrity: sha512-wkRhFMnzY9BQDc6mK1ORw+NN+v2DYY8HRI1P5n9Lvh7iwXzGeef5XKHQYIMFggGLPkGjlX14tjlXiEzb4SqJPg==}
+    engines: {node: '>= 12'}
+    dependencies:
+      estree-walker: 2.0.2
+      magic-string: 0.27.0
+    dev: true
+
   /@rollup/plugin-babel@5.3.1(@babel/core@7.22.1)(rollup@2.79.1):
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
     engines: {node: '>= 10.0.0'}
@@ -1397,12 +1425,31 @@ packages:
       rollup: 2.79.1
     dev: true
 
+  /@rollup/pluginutils@5.0.2(rollup@2.79.1):
+    resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@types/estree': 1.0.1
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+      rollup: 2.79.1
+    dev: true
+
   /@types/estree@0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
     dev: true
 
   /@types/estree@1.0.1:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
+    dev: true
+
+  /@types/lodash@4.14.195:
+    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==}
     dev: true
 
   /@types/node@20.2.5:
@@ -1671,6 +1718,10 @@ packages:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
 
+  /lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
+
   /lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
@@ -1681,6 +1732,13 @@ packages:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
       sourcemap-codec: 1.4.8
+    dev: true
+
+  /magic-string@0.27.0:
+    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
   /minimatch@3.1.2:

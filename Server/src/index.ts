@@ -7,11 +7,12 @@ import {
     matchLoop,
     matchTerminate,
     matchSignal,
-} from './match_handler';
-import { rpcCreateMatch } from './match_rpc';
+} from "./match_handler";
+
+import { rpcCreateMatch } from "./match_rpc";
 
 function InitModule(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, initializer: nkruntime.Initializer) {
-    initializer.registerRpc('create_match', rpcCreateMatch);
+    initializer.registerRpc("create_match", rpcCreateMatch);
 
     initializer.registerMatch(moduleName, {
         matchInit,
@@ -23,7 +24,7 @@ function InitModule(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkrunt
         matchSignal,
     });
 
-    logger.info('TypeScript module loaded.');
+    logger.info("TypeScript module loaded.");
 }
 
 // Reference InitModule to avoid it getting removed on build

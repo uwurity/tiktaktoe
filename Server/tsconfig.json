@@ -5,8 +5,13 @@
       "esModuleInterop": true,
       "noUnusedLocals": true,
       "removeComments": true,
+      "isolatedModules": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "resolveJsonModule": true,
       "target": "es5",
       "module": "ESNext",
+      "lib": ["ESNext"],
       "strict": true,
     },
     "files": [
@@ -17,6 +22,6 @@
     ],
     "exclude": [
       "node_modules",
-      "build"
+      "data"
     ]
 }

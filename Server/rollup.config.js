@@ -4,11 +4,12 @@ import json from '@rollup/plugin-json';
 import babel from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json';
+import { optimizeLodashImports } from "@optimize-lodash/rollup-plugin";
 
 const extensions = ['.mjs', '.js', '.ts', '.json'];
 
 export default {
-    input: './src/main.ts',
+    input: pkg.source,
     external: ['nakama-runtime'],
     plugins: [
         // Allows node_modules resolution
@@ -27,6 +28,8 @@ export default {
             extensions,
             babelHelpers: 'bundled',
         }),
+
+        optimizeLodashImports(),
     ],
     output: {
         file: pkg.main,
