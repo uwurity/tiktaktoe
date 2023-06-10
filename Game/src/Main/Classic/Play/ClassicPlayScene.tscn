@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://crf5855r2b1wt"]
+
+[ext_resource type="Script" path="res://src/Main/Classic/Play/ClassicPlayScene.cs" id="1_vwyw3"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_2rqo4"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_qhbaj"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="3_n8qje"]
+[ext_resource type="Texture2D" uid="uid://bchpaseqjaamj" path="res://assets/like.png" id="4_q3osr"]
+[ext_resource type="Texture2D" uid="uid://c5sxq38rr42m2" path="res://assets/angry.png" id="5_8lagw"]
+[ext_resource type="Texture2D" uid="uid://bwonx0qqoyjce" path="res://assets/love.png" id="5_ed4g2"]
+[ext_resource type="Texture2D" uid="uid://buqx5imuykv0a" path="res://assets/wow.png" id="6_luqtf"]
+[ext_resource type="Texture2D" uid="uid://qrl1etim6e5t" path="res://assets/sad.png" id="7_sgbg1"]
+[ext_resource type="Texture2D" uid="uid://cyqo7owufdsl6" path="res://assets/haha.png" id="9_jte5e"]
+[ext_resource type="Texture2D" uid="uid://bqetdu2igai2x" path="res://assets/care.png" id="10_yckd7"]
+[ext_resource type="Script" path="res://src/Main/Classic/Play/TileMap.gd" id="12_i72or"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8uw8j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="TileSet" id="TileSet_jcfvc"]
+tile_size = Vector2i(50, 50)
+
+[node name="ClassicPlayScene" type="Node2D" node_paths=PackedStringArray("BackButton")]
+script = ExtResource("1_vwyw3")
+BackButton = NodePath("NinePatchRect/BackButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_2rqo4")
+metadata/_edit_lock_ = true
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 27.0
+offset_right = 1165.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0.952941, 0.72549, 0.180392, 1)
+theme_override_fonts/font = ExtResource("3_n8qje")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_8uw8j")
+text = "<  Quit Game"
+script = ExtResource("2_qhbaj")
+Scene = "MainScene"
+
+[node name="LikeButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 370.0
+offset_right = 920.0
+offset_bottom = 448.0
+icon = ExtResource("4_q3osr")
+
+[node name="AngryButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 1045.0
+offset_top = 437.0
+offset_right = 1121.0
+offset_bottom = 515.0
+icon = ExtResource("5_8lagw")
+
+[node name="SadButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 962.0
+offset_top = 438.0
+offset_right = 1038.0
+offset_bottom = 516.0
+icon = ExtResource("7_sgbg1")
+
+[node name="WowButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 885.0
+offset_top = 438.0
+offset_right = 961.0
+offset_bottom = 516.0
+icon = ExtResource("6_luqtf")
+
+[node name="HahaButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 1081.0
+offset_top = 370.0
+offset_right = 1157.0
+offset_bottom = 448.0
+icon = ExtResource("9_jte5e")
+
+[node name="CareButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 1001.0
+offset_top = 371.0
+offset_right = 1077.0
+offset_bottom = 449.0
+icon = ExtResource("10_yckd7")
+
+[node name="LoveButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 924.0
+offset_top = 370.0
+offset_right = 1000.0
+offset_bottom = 448.0
+icon = ExtResource("5_ed4g2")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(341, 390)
+tile_set = SubResource("TileSet_jcfvc")
+cell_quadrant_size = 15
+format = 2
+script = ExtResource("12_i72or")
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="." method="OnBackButton_pressed"]

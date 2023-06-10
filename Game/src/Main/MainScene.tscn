@@ -1,40 +1,98 @@
-[gd_scene load_steps=2 format=3 uid="uid://chfiule5llh4w"]
+[gd_scene load_steps=8 format=3 uid="uid://cdiqrwswrv27l"]
 
 [ext_resource type="Script" path="res://src/Main/MainScene.cs" id="1_bhtee"]
+[ext_resource type="Texture2D" uid="uid://dmrmar7vb0t3i" path="res://assets/background.png" id="2_4y24u"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_37sah"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="2_d0atg"]
+[ext_resource type="StyleBox" uid="uid://2vwmhuj5b2n2" path="res://addons/Style/buttonMainColor.tres" id="4_jgkcw"]
+[ext_resource type="Texture2D" uid="uid://6e5lomcbn8ah" path="res://icon.svg" id="6_y814d"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1crr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("AdventureButton")]
 script = ExtResource("1_bhtee")
+AdventureButton = NodePath("NinePatchRect/AdventureButton")
+metadata/_edit_horizontal_guides_ = []
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_4y24u")
+
+[node name="ClassicButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 465.0
+offset_right = 395.0
+offset_bottom = 527.0
+theme_override_fonts/font = ExtResource("2_d0atg")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_jgkcw")
+text = "Classic"
+script = ExtResource("2_37sah")
+Scene = "ClassicScene"
+
+[node name="AdventureButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 564.0
+offset_right = 397.0
+offset_bottom = 639.0
+theme_override_fonts/font = ExtResource("2_d0atg")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_jgkcw")
+text = "Adventure"
+script = ExtResource("2_37sah")
+Scene = "JoinRoomScene"
+
+[node name="SettingsButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 668.0
+offset_right = 402.0
+offset_bottom = 741.0
+theme_override_fonts/font = ExtResource("2_d0atg")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_jgkcw")
+text = "Settings"
+script = ExtResource("2_37sah")
+Scene = "SettingsScene"
+
+[node name="ProfileButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 862.0
+offset_top = 670.0
+offset_right = 1078.0
+offset_bottom = 730.0
+theme_override_fonts/font = ExtResource("2_d0atg")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_x1crr")
+text = "View Profile"
+script = ExtResource("2_37sah")
+Scene = "ProfileScene"
+
+[node name="Avatar" type="TextureRect" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 907.0
+offset_top = 531.0
+offset_right = 1046.0
+offset_bottom = 659.0
+texture = ExtResource("6_y814d")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 454.0
-offset_top = 117.0
-offset_right = 704.0
-offset_bottom = 222.0
-text = "tiktaktoe"
+offset_left = 243.0
+offset_top = 112.0
+offset_right = 999.0
+offset_bottom = 267.0
+theme_override_fonts/font = ExtResource("2_d0atg")
+theme_override_font_sizes/font_size = 128
+text = "TIKTAKTOE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ClassicButton" type="Button" parent="."]
-offset_left = 72.0
-offset_top = 371.0
-offset_right = 250.0
-offset_bottom = 420.0
-text = "Classic"
-
-[node name="AdventureButton" type="Button" parent="."]
-offset_left = 72.0
-offset_top = 466.0
-offset_right = 250.0
-offset_bottom = 515.0
-text = "Adventure"
-
-[node name="SettingsButton" type="Button" parent="."]
-offset_left = 72.0
-offset_top = 568.0
-offset_right = 250.0
-offset_bottom = 617.0
-text = "Settings"
-
-[connection signal="pressed" from="ClassicButton" to="." method="OnClassicButton_pressed"]
-[connection signal="pressed" from="AdventureButton" to="." method="OnAdventureButton_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButton_pressed"]
+[connection signal="pressed" from="NinePatchRect/ClassicButton" to="NinePatchRect/ClassicButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/AdventureButton" to="." method="OnAdventureButton_pressed"]
+[connection signal="pressed" from="NinePatchRect/SettingsButton" to="NinePatchRect/SettingsButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/ProfileButton" to="NinePatchRect/ProfileButton" method="OnPressed"]

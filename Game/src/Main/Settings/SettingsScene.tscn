@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddl4yjn73ewji"]
+
+[ext_resource type="Script" path="res://src/Main/Settings/SettingsScene.cs" id="1_j3qt0"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_juu3n"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_uqj3c"]
+
+[node name="SettingsScene" type="Node2D"]
+script = ExtResource("1_j3qt0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_uqj3c")
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 573.0
+offset_right = 229.0
+offset_bottom = 616.0
+text = "Back"
+script = ExtResource("2_juu3n")
+Scene = "back"
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 98.0
+offset_right = 650.0
+offset_bottom = 124.0
+text = "Settings scene"
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]

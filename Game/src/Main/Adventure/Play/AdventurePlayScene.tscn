@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm2qlba4yfyjg"]
+
+[ext_resource type="Script" path="res://src/Main/Adventure/Play/AdventurePlayScene.cs" id="1_77lyy"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_ds2cb"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_h018x"]
+
+[sub_resource type="TileSet" id="TileSet_1lmyk"]
+tile_size = Vector2i(50, 50)
+
+[node name="AdventurePlayScene" type="Node2D" node_paths=PackedStringArray("BackButton")]
+position = Vector2(-3, 0)
+script = ExtResource("1_77lyy")
+BackButton = NodePath("NinePatchRect/BackButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ds2cb")
+
+[node name="TileMap" type="TileMap" parent="NinePatchRect"]
+position = Vector2(766, 373)
+tile_set = SubResource("TileSet_1lmyk")
+format = 2
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 27.0
+offset_right = 170.0
+offset_bottom = 71.0
+scale = Vector2(1.29492, 1.1014)
+text = "Back"
+script = ExtResource("2_h018x")
+Scene = "MainScene"
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="." method="OnBackButton_pressed"]

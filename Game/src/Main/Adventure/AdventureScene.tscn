@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3ldt334bfr1g"]
+
+[ext_resource type="Script" path="res://src/Main/Adventure/AdventureScene.cs" id="1_8v2i6"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_k2x0t"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_oppmj"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="3_gdy5g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgsvr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="AdventureScene" type="Node2D"]
+position = Vector2(-6, -10)
+script = ExtResource("1_8v2i6")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 12.0
+offset_right = 1188.0
+offset_bottom = 795.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_k2x0t")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 196.0
+offset_right = 831.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("3_gdy5g")
+text = "Configure an Adventure room here"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SceneDescription" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 98.0
+offset_right = 786.0
+offset_bottom = 124.0
+theme_override_fonts/font = ExtResource("3_gdy5g")
+text = "Adventure scene"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00421941
+anchor_top = 0.063857
+anchor_right = 0.00421941
+anchor_bottom = 0.063857
+offset_left = 55.0
+offset_top = 562.0
+offset_right = 224.0
+offset_bottom = 602.0
+theme_override_fonts/font = ExtResource("3_gdy5g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hgsvr")
+text = "Back"
+script = ExtResource("2_oppmj")
+Scene = "back"
+metadata/_edit_use_anchors_ = true
+
+[node name="CreateRoomButton" type="Button" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 914.0
+offset_top = 607.0
+offset_right = -112.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_gdy5g")
+text = "Create Room"
+script = ExtResource("2_oppmj")
+Scene = "LobbyScene"
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/CreateRoomButton" to="NinePatchRect/CreateRoomButton" method="OnPressed"]

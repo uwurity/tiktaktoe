@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=3 uid="uid://c30u5p8kf4m6e"]
+
+[ext_resource type="Script" path="res://src/Main/Profile/SignIn/SignInScene.cs" id="1_2hi82"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_k34tn"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="2_qt8lb"]
+[ext_resource type="StyleBox" uid="uid://b2hv8cird6a8" path="res://addons/Style/TextBoxColor.tres" id="4_4js6a"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="4_ipj11"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2okb"]
+bg_color = Color(0.952941, 0.72549, 0.180392, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lscnd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="SignInScene" type="Node2D" node_paths=PackedStringArray("Username", "Password")]
+script = ExtResource("1_2hi82")
+Username = NodePath("NinePatchRect/username")
+Password = NodePath("NinePatchRect/password")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1186.0
+offset_bottom = 785.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("2_k34tn")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="lb_username" type="Label" parent="NinePatchRect"]
+layout_mode = 2
+offset_left = 318.0
+offset_top = 132.0
+offset_right = 870.0
+offset_bottom = 170.0
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 25
+text = "Username
+"
+
+[node name="username" type="LineEdit" parent="NinePatchRect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+offset_left = 321.0
+offset_top = 178.0
+offset_right = 873.0
+offset_bottom = 228.0
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("4_4js6a")
+
+[node name="lb_password" type="Label" parent="NinePatchRect"]
+layout_mode = 2
+offset_left = 323.0
+offset_top = 255.0
+offset_right = 875.0
+offset_bottom = 293.0
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 25
+text = "Password
+"
+
+[node name="password" type="LineEdit" parent="NinePatchRect"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+offset_left = 324.0
+offset_top = 298.0
+offset_right = 876.0
+offset_bottom = 348.0
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("4_4js6a")
+
+[node name="LoginButton" type="Button" parent="NinePatchRect"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+offset_left = 450.0
+offset_top = 396.0
+offset_right = 700.0
+offset_bottom = 466.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2okb")
+text = "Sign In
+"
+expand_icon = true
+
+[node name="SignupButton" type="Button" parent="NinePatchRect"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+offset_left = 397.0
+offset_top = 591.0
+offset_right = 752.0
+offset_bottom = 661.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2okb")
+text = "Create new accound
+"
+expand_icon = true
+script = ExtResource("4_ipj11")
+Scene = "SignUpScene"
+
+[node name="ForgotButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 478.0
+offset_right = 698.0
+offset_bottom = 530.0
+theme_override_colors/font_color = Color(0.952941, 0.72549, 0.180392, 1)
+theme_override_fonts/font = ExtResource("2_qt8lb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_lscnd")
+text = "Forgot password?"
+script = ExtResource("4_ipj11")
+Scene = "ResetPasswordScene"
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 495.0
+offset_right = 729.0
+offset_bottom = 553.0
+theme_override_colors/font_color = Color(0.952941, 0.72549, 0.180392, 1)
+theme_override_font_sizes/font_size = 40
+text = "__________________"
+
+[connection signal="pressed" from="NinePatchRect/SignupButton" to="NinePatchRect/SignupButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/ForgotButton" to="NinePatchRect/ForgotButton" method="OnPressed"]

@@ -11,14 +11,27 @@ config_version=5
 [application]
 
 config/name="tiktaktoe"
-run/main_scene="res://src/Game/GameScene.tscn"
+run/main_scene="res://src/Main/Profile/SignIn/SignInScene.tscn"
 config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://src/Autoload/Global.cs"
+MatchState="*res://src/Autoload/MatchState.cs"
+Online="*res://src/Autoload/Online.cs"
+SceneManager="*res://addons/scene_manager/scene_manager.tscn"
+Scenes="*res://addons/scene_manager/scenes.gd"
+
+[display]
+
+window/size/viewport_width=1185
+window/size/viewport_height=783
 
 [dotnet]
 
 project/assembly_name="tiktaktoe"
 
-[rendering]
+[editor_plugins]
 
-renderer/rendering_method.mobile="gl_compatibility"
+enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")

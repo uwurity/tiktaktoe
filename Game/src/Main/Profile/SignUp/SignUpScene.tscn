@@ -1,0 +1,149 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk77upah7ryl0"]
+
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="1_tknb8"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="2_3k0c5"]
+[ext_resource type="StyleBox" path="res://addons/Style/buttonColor.tres" id="3_iuuuy"]
+[ext_resource type="StyleBox" uid="uid://b2hv8cird6a8" path="res://addons/Style/TextBoxColor.tres" id="3_uwo3a"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="4_m34b8"]
+
+[node name="SignUpScene" type="Node2D"]
+position = Vector2(4, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 1185.0
+offset_bottom = 783.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("1_tknb8")
+metadata/_edit_lock_ = true
+
+[node name="username" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(400, 50)
+anchors_preset = -1
+anchor_left = 0.270886
+anchor_top = 0.180077
+anchor_right = 0.736709
+anchor_bottom = 0.243934
+offset_left = 406.0
+offset_top = 131.0
+offset_right = 806.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_uwo3a")
+
+[node name="email" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(400, 50)
+anchors_preset = -1
+anchor_left = 0.27173
+anchor_top = 0.286079
+anchor_right = 0.737553
+anchor_bottom = 0.349936
+offset_left = 410.0
+offset_top = 217.0
+offset_right = 810.0
+offset_bottom = 267.0
+scale = Vector2(1.00309, 0.987947)
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_uwo3a")
+
+[node name="password" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(400, 50)
+anchors_preset = -1
+anchor_left = 0.270886
+anchor_top = 0.394636
+anchor_right = 0.736709
+anchor_bottom = 0.458493
+offset_left = 413.0
+offset_top = 298.0
+offset_right = 813.0
+offset_bottom = 348.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_uwo3a")
+metadata/_edit_use_anchors_ = true
+
+[node name="passwordCheck" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(400, 50)
+anchors_preset = -1
+anchor_left = 0.273418
+anchor_top = 0.499361
+anchor_right = 0.739241
+anchor_bottom = 0.563218
+offset_left = 414.0
+offset_top = 388.0
+offset_right = 814.0
+offset_bottom = 438.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_uwo3a")
+
+[node name="CreateButton" type="Button" parent="."]
+offset_left = 431.0
+offset_top = 550.0
+offset_right = 778.0
+offset_bottom = 629.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_iuuuy")
+text = "Create new account"
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 73.0
+offset_top = 692.0
+offset_right = 232.0
+offset_bottom = 743.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 32
+text = "<  Back"
+script = ExtResource("4_m34b8")
+Scene = "back"
+
+[node name="CheckBox" type="CheckBox" parent="."]
+offset_left = 436.0
+offset_top = 468.0
+offset_right = 735.0
+offset_bottom = 505.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 20
+text = "I agree with tiktaktoe ToS"
+
+[node name="UsernameLabel" type="Label" parent="."]
+offset_left = 408.0
+offset_top = 100.0
+offset_right = 575.0
+offset_bottom = 134.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 25
+text = "Username"
+
+[node name="EmailLabel" type="Label" parent="."]
+offset_left = 414.0
+offset_top = 187.0
+offset_right = 519.0
+offset_bottom = 221.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 25
+text = "Email"
+
+[node name="PasswordLabel" type="Label" parent="."]
+offset_left = 416.0
+offset_top = 270.0
+offset_right = 545.0
+offset_bottom = 304.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 25
+text = "Password"
+
+[node name="CheckpassLabel" type="Label" parent="."]
+offset_left = 410.0
+offset_top = 358.0
+offset_right = 652.0
+offset_bottom = 392.0
+theme_override_fonts/font = ExtResource("2_3k0c5")
+theme_override_font_sizes/font_size = 25
+text = "Confirm password"
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]

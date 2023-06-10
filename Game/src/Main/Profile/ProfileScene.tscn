@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyruiyjxg4d8m"]
+
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="1_kxckl"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="2_1lksy"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="3_qc6ua"]
+[ext_resource type="Texture2D" uid="uid://6e5lomcbn8ah" path="res://icon.svg" id="4_biasg"]
+
+[node name="ProfileScene" type="Node2D"]
+position = Vector2(4, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_kxckl")
+metadata/_edit_lock_ = true
+
+[node name="NameLabel" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 277.0
+offset_right = 461.0
+offset_bottom = 334.0
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 36
+text = "Your Name:"
+
+[node name="EmailLabel" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 345.0
+offset_right = 461.0
+offset_bottom = 391.0
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 36
+text = "Your Email:"
+
+[node name="ChangePassButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 436.0
+offset_right = 752.0
+offset_bottom = 487.0
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 32
+text = "Change Password"
+script = ExtResource("3_qc6ua")
+Scene = "ResetPasswordScene"
+
+[node name="LogoutButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 519.0
+offset_right = 660.0
+offset_bottom = 570.0
+theme_override_colors/font_color = Color(0.952941, 0.72549, 0.180392, 1)
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 32
+text = "Log out
+"
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 683.0
+offset_right = 161.0
+offset_bottom = 714.0
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 36
+text = "<  Back"
+script = ExtResource("3_qc6ua")
+Scene = "back"
+
+[node name="Name" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 285.0
+offset_right = 640.0
+offset_bottom = 331.0
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 36
+text = "Name"
+
+[node name="Email" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 346.0
+offset_right = 639.0
+offset_bottom = 392.0
+theme_override_fonts/font = ExtResource("2_1lksy")
+theme_override_font_sizes/font_size = 36
+text = "Email"
+
+[node name="Avatar" type="TextureRect" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 106.0
+offset_right = 642.0
+offset_bottom = 246.0
+texture = ExtResource("4_biasg")
+
+[connection signal="pressed" from="NinePatchRect/ChangePassButton" to="NinePatchRect/ChangePassButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]

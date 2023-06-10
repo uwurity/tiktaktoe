@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://dc1kmcegwkg1d"]
+
+[ext_resource type="Script" path="res://src/Main/Classic/ClassicScene.cs" id="1_isyfl"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_f5lt4"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_pvi4g"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="3_ol21u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1q4a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ctiq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="ClassicScene" type="Node2D" node_paths=PackedStringArray("PvpButton")]
+script = ExtResource("1_isyfl")
+PvpButton = NodePath("NinePatchRect/PvpButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 784)
+offset_right = 1185.0
+offset_bottom = 784.0
+texture = ExtResource("2_pvi4g")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 371.0
+offset_top = 84.0
+offset_right = 795.0
+offset_bottom = 159.0
+theme_override_fonts/font = ExtResource("3_ol21u")
+theme_override_font_sizes/font_size = 60
+text = "Classic scene"
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 647.0
+offset_right = 212.0
+offset_bottom = 703.0
+theme_override_fonts/font = ExtResource("3_ol21u")
+theme_override_font_sizes/font_size = 40
+text = "<  Back"
+script = ExtResource("2_f5lt4")
+Scene = "back"
+
+[node name="PveButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 260.0
+offset_right = 662.0
+offset_bottom = 308.0
+theme_override_fonts/font = ExtResource("3_ol21u")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_s1q4a")
+text = "PVE"
+script = ExtResource("2_f5lt4")
+Scene = "ClassicPlayScene"
+
+[node name="PvpButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 395.0
+offset_right = 657.0
+offset_bottom = 443.0
+theme_override_fonts/font = ExtResource("3_ol21u")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ctiq")
+text = "PVP"
+script = ExtResource("2_f5lt4")
+Scene = "JoinRoomScene"
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/PveButton" to="NinePatchRect/PveButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/PvpButton" to="." method="OnPvpButton_pressed"]

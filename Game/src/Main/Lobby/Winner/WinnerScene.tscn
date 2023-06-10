@@ -1,0 +1,234 @@
+[gd_scene load_steps=8 format=3 uid="uid://sprsbc7w8my2"]
+
+[ext_resource type="Script" path="res://src/Main/Lobby/Winner/WinnerScene.cs" id="1_ubkvx"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_xibsf"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="3_d2l71"]
+[ext_resource type="StyleBox" path="res://addons/Style/buttonColor.tres" id="4_4ygl2"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="4_7wu8v"]
+[ext_resource type="Texture2D" uid="uid://cyqo7owufdsl6" path="res://assets/haha.png" id="6_j7wk5"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_jlhen"]
+script/source = "using Chickensoft.GoDotNet;
+using Godot;
+using tiktaktoe.Autoload;
+using tiktaktoe.Main.Adventure;
+using tiktaktoe.Main.Adventure.Play;
+using tiktaktoe.Main.Classic;
+using tiktaktoe.Main.Classic.Play;
+using tiktaktoe.Utils;
+public partial class VBoxContainer : Godot.VBoxContainer
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
+
+[node name="WinnerScene" type="Node2D"]
+script = ExtResource("1_ubkvx")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 1166.0
+offset_bottom = 722.0
+texture = ExtResource("2_xibsf")
+metadata/_edit_lock_ = true
+
+[node name="PlayButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 622.0
+offset_right = 1133.0
+offset_bottom = 673.0
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("4_4ygl2")
+text = "PLAY AGAIN >"
+script = ExtResource("4_7wu8v")
+Scene = "AdventurePlayScene"
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 619.0
+offset_right = 196.0
+offset_bottom = 665.0
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 32
+text = "< BACK"
+script = ExtResource("4_7wu8v")
+Scene = "back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 206.0
+offset_right = 828.0
+offset_bottom = 565.0
+script = SubResource("CSharpScript_jlhen")
+
+[node name="Player1" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 70)
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player1"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_j7wk5")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player1"]
+custom_minimum_size = Vector2(25, 1)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/VBoxContainer/Player1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 45
+text = "Player 1 "
+
+[node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player1"]
+custom_minimum_size = Vector2(70, 1)
+layout_mode = 2
+
+[node name="Winner" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player1"]
+layout_mode = 2
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 15)
+layout_mode = 2
+
+[node name="Player2" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 70)
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_j7wk5")
+expand_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player2"]
+custom_minimum_size = Vector2(25, 1)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/VBoxContainer/Player2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 45
+text = "Player 1"
+
+[node name="MarginContainer4" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player2"]
+custom_minimum_size = Vector2(70, 1)
+layout_mode = 2
+
+[node name="Winner" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 15)
+layout_mode = 2
+
+[node name="Player3" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 70)
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_j7wk5")
+expand_mode = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player3"]
+custom_minimum_size = Vector2(25, 1)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/VBoxContainer/Player3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 45
+text = "Player 1"
+
+[node name="MarginContainer6" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player3"]
+custom_minimum_size = Vector2(70, 1)
+layout_mode = 2
+
+[node name="Winner" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player3"]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 15)
+layout_mode = 2
+
+[node name="Player4" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(50, 70)
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player4"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_j7wk5")
+expand_mode = 2
+
+[node name="MarginContainer7" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player4"]
+custom_minimum_size = Vector2(25, 1)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/VBoxContainer/Player4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 45
+text = "Player 1"
+
+[node name="MarginContainer8" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Player4"]
+custom_minimum_size = Vector2(70, 1)
+layout_mode = 2
+
+[node name="Winner" type="TextureRect" parent="NinePatchRect/VBoxContainer/Player4"]
+layout_mode = 2
+
+[node name="TimeLable" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 945.0
+offset_top = 460.0
+offset_right = 1065.0
+offset_bottom = 514.0
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 40
+text = "Time:"
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="NinePatchRect/TimeLable"]
+layout_mode = 0
+offset_top = 59.0
+offset_right = 120.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 38
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -159.5
+offset_top = 46.0
+offset_right = 159.5
+offset_bottom = 121.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_d2l71")
+theme_override_font_sizes/font_size = 60
+text = "VICTORY"
+
+[connection signal="pressed" from="NinePatchRect/PlayButton" to="NinePatchRect/PlayButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]

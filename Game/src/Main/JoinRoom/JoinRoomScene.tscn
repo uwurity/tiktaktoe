@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://s451s0xmaohx"]
+
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_uxg8b"]
+[ext_resource type="Script" path="res://src/Main/JoinRoom/JoinRoomScene.cs" id="1_yiy2t"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_ppko0"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="3_uap2i"]
+
+[node name="JoinRoomScene" type="Node2D" node_paths=PackedStringArray("MatchDescription", "JoinButton", "JoinCode")]
+script = ExtResource("1_yiy2t")
+MatchDescription = NodePath("")
+JoinButton = NodePath("NinePatchRect/JoinButton")
+JoinCode = NodePath("NinePatchRect/JoinCode")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ppko0")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 166.0
+offset_right = 826.0
+offset_bottom = 219.0
+theme_override_fonts/font = ExtResource("3_uap2i")
+theme_override_font_sizes/font_size = 36
+text = "Join or create a room"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JoinCode" type="SpinBox" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 244.0
+offset_right = 768.0
+offset_bottom = 323.0
+min_value = 10000.0
+max_value = 99999.0
+value = 99999.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="JoinButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 376.0
+offset_right = 665.0
+offset_bottom = 408.0
+text = "Join"
+script = ExtResource("1_uxg8b")
+Scene = "LobbyScene"
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 585.0
+offset_right = 189.0
+offset_bottom = 619.0
+text = "Back"
+script = ExtResource("1_uxg8b")
+Scene = "back"
+
+[connection signal="value_changed" from="NinePatchRect/JoinCode" to="." method="OnJoinCode_value_changed"]
+[connection signal="pressed" from="NinePatchRect/JoinButton" to="NinePatchRect/JoinButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]

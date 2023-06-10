@@ -1,0 +1,216 @@
+[gd_scene load_steps=7 format=3 uid="uid://di7ic873hanp"]
+
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_ohk3p"]
+[ext_resource type="Script" path="res://src/Main/Lobby/LobbyScene.cs" id="1_uxm4b"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_ww2n0"]
+[ext_resource type="Texture2D" uid="uid://bqetdu2igai2x" path="res://assets/care.png" id="4_1r6gl"]
+[ext_resource type="FontFile" uid="uid://cdjumqdonpv67" path="res://addons/Style/RubikWetPaint-Regular.ttf" id="5_e7oat"]
+[ext_resource type="StyleBox" path="res://addons/Style/buttonColor.tres" id="5_fdqyd"]
+
+[node name="LobbyScene" type="Node2D" node_paths=PackedStringArray("JoinCode", "BackButton", "DemoPlayButton")]
+script = ExtResource("1_uxm4b")
+JoinCode = NodePath("NinePatchRect/Label/JoinCode")
+BackButton = NodePath("NinePatchRect/BackButton")
+DemoPlayButton = NodePath("NinePatchRect/DemoPlayButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ww2n0")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 105.0
+offset_right = 550.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 38
+text = "YOUR ROOM: "
+
+[node name="JoinCode" type="Label" parent="NinePatchRect/Label"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -24.5
+offset_bottom = 24.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 38
+text = "12345"
+
+[node name="State" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.5
+offset_top = 141.0
+offset_right = 206.5
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 32
+text = "Waiting for players (4/4)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 653.0
+offset_right = 151.0
+offset_bottom = 699.0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 38
+text = "< Back"
+script = ExtResource("1_ohk3p")
+Scene = "back"
+
+[node name="DemoPlayButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 943.0
+offset_top = 658.0
+offset_right = 1117.0
+offset_bottom = 696.0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = ExtResource("5_fdqyd")
+text = "PLAY"
+script = ExtResource("1_ohk3p")
+Scene = "AdventurePlayScene"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -418.0
+offset_top = -161.0
+offset_right = 418.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Avatar1" type="TextureRect" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_1r6gl")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/HBoxContainer/Avatar1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = 35.0
+offset_right = 64.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 32
+text = "Player1"
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Avatar2" type="TextureRect" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_1r6gl")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/HBoxContainer/Avatar2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = 35.0
+offset_right = 64.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 32
+text = "Player1"
+
+[node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Avatar3" type="TextureRect" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_1r6gl")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/HBoxContainer/Avatar3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = 35.0
+offset_right = 64.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 32
+text = "Player1"
+
+[node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Avatar4" type="TextureRect" parent="NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_1r6gl")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="NinePatchRect/HBoxContainer/Avatar4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = 35.0
+offset_right = 64.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_e7oat")
+theme_override_font_sizes/font_size = 32
+text = "Player1"
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="NinePatchRect/BackButton" method="OnPressed"]
+[connection signal="pressed" from="NinePatchRect/DemoPlayButton" to="NinePatchRect/DemoPlayButton" method="OnPressed"]
