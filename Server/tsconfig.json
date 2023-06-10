@@ -1,27 +1,37 @@
 {
-    "compilerOptions": {
-      "noImplicitReturns": true,
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "noUnusedLocals": true,
-      "removeComments": true,
-      "isolatedModules": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "resolveJsonModule": true,
-      "target": "es5",
-      "module": "ESNext",
-      "lib": ["ESNext"],
-      "strict": true,
-    },
-    "files": [
-      "./node_modules/nakama-runtime/index.d.ts",
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "experimentalDecorators": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "target": "es5",
+    "module": "ESNext",
+    "lib": [
+      "ESNext"
     ],
-    "include": [
-      "src/**/*",
-    ],
-    "exclude": [
-      "node_modules",
-      "data"
+    "strict": true,
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
     ]
+  },
+  "files": [
+    "./node_modules/nakama-runtime/index.d.ts"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "data"
+  ]
 }
