@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://candwn6j6fmkf"]
+
+[ext_resource type="Script" path="res://src/Main/AfterCredit/AfterCreditScene.cs" id="1_kve8i"]
+[ext_resource type="Texture2D" uid="uid://xrdpg0jik3d5" path="res://Sourse/3737136.webp" id="2_0bh38"]
+[ext_resource type="FontFile" uid="uid://cuxiaxhtfhrgw" path="res://Sourse/RubikWetPaint-Regular.ttf" id="3_vskpm"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="4_v2hiy"]
+
+[node name="AfterCreditScene" type="Node2D"]
+script = ExtResource("1_kve8i")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_top = -1.0
+offset_right = 1155.0
+offset_bottom = 649.0
+
+[node name="Sprite2D" type="Sprite2D" parent="NinePatchRect"]
+modulate = Color(0.156863, 0.156863, 0.156863, 1)
+position = Vector2(578, 325)
+scale = Vector2(0.867868, 0.761176)
+texture = ExtResource("2_0bh38")
+
+[node name="Body" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 129.0
+offset_right = 936.0
+offset_bottom = 467.0
+text = "											Thank you for playing our game!
+
+				We are group 3,here is our project, our group includes members:
+											Phan Van Do - 21520722
+											Pham Thieu Gia Khang - 21520967
+											Ngo Khanh Trinh - 21522716
+											Phan Ba Cuong - 21521907
+We hope you have had a great experience with our game, and hope you can give us some 
+						comments and feedback to improve the quality of your product.
+And in addition, the most sincere thanks for the efforts of the team members to make 
+																TIKTAKTOE!
+
+			Stay tuned for updates and new releases from our team. See you soon!
+"
+horizontal_alignment = 1
+text_direction = 3
+
+[node name="TIKTAKTOE" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 61.0
+offset_right = 736.0
+offset_bottom = 122.0
+theme_override_fonts/font = ExtResource("3_vskpm")
+theme_override_font_sizes/font_size = 48
+text = "TIKTAKTOE"
+horizontal_alignment = 1
+vertical_alignment = 1
+structured_text_bidi_override_options = [null]
+
+[node name="BackButton" type="Button" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 558.0
+offset_right = 151.0
+offset_bottom = 595.0
+theme_override_fonts/font = ExtResource("3_vskpm")
+theme_override_font_sizes/font_size = 28
+text = "< Back"
+script = ExtResource("4_v2hiy")
+Scene = "MainSence"
+
+[node name="LinkButton" type="LinkButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 394.0
+offset_top = 498.0
+offset_right = 809.0
+offset_bottom = 538.0
+text = "Our GitHub: https://github.com/uwurity/tiktaktoe.git"
+uri = "https://github.com/uwurity/tiktaktoe.git"
+
+[connection signal="pressed" from="NinePatchRect/BackButton" to="." method="OnBackButton_pressed" binds= ["MainScene"]]
+[connection signal="pressed" from="NinePatchRect/LinkButton" to="." method="OnLinkButton_pressed"]

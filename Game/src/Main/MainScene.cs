@@ -27,4 +27,21 @@ public partial class MainScene : Node2D
 		MatchState.Level = nameof(AdventureScene);
 		AdventureButton.OnPressed();
 	}
+	private void ONCreditButton_pressed()
+	{
+		// Replace with function body.
+		//CreditButton.Onpressed();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

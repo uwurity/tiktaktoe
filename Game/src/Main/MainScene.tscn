@@ -32,7 +32,7 @@ offset_right = 250.0
 offset_bottom = 515.0
 text = "Adventure"
 script = ExtResource("2_37sah")
-Scene = "JoinRoomScene"
+Scene = "AdventureScene"
 
 [node name="SettingsButton" type="Button" parent="."]
 offset_left = 72.0
