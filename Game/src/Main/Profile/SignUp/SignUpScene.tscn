@@ -1,3 +1,120 @@
-[gd_scene format=3 uid="uid://bfejo6fjnikxj"]
+[gd_scene load_steps=8 format=3 uid="uid://dwbhj2mq0o73s"]
 
-[node name="SignUpScene" type="Node2D"]
+[ext_resource type="Script" path="res://src/Main/Profile/SignUp/SignUpScene.cs" id="1_owo2m"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="2_a8o1m"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="2_hbyde"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="4_m34b8"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="4_umcc4"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="5_yofoj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n61he"]
+blend_mode = 3
+
+[node name="SignUpScene" type="Node" node_paths=PackedStringArray("Username", "Email", "Password", "PasswordCheck", "TosCheckBox", "SignUpButton")]
+script = ExtResource("1_owo2m")
+Username = NodePath("VBoxContainer/SignUpContainer/Username")
+Email = NodePath("VBoxContainer/SignUpContainer/Email")
+Password = NodePath("VBoxContainer/SignUpContainer/Password")
+PasswordCheck = NodePath("VBoxContainer/SignUpContainer/PasswordCheck")
+TosCheckBox = NodePath("VBoxContainer/SignUpContainer/TosCheckBox")
+SignUpButton = NodePath("VBoxContainer/SignUpContainer/SignUpButton")
+
+[node name="BackgroundScene" parent="." instance=ExtResource("2_a8o1m")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_n61he")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hbyde")
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("4_umcc4")]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer" instance=ExtResource("5_yofoj")]
+layout_mode = 2
+
+[node name="SignUpContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 7
+
+[node name="UsernameLabel" type="Label" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Username"
+
+[node name="Username" type="LineEdit" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="EmailLabel" type="Label" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Email"
+
+[node name="Email" type="LineEdit" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="PasswordLabel" type="Label" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Password"
+
+[node name="Password" type="LineEdit" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+secret = true
+caret_blink = true
+caret_blink_interval = 0.5
+metadata/_edit_use_anchors_ = true
+
+[node name="PasswordCheckLabel" type="Label" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Confirm password"
+
+[node name="PasswordCheck" type="LineEdit" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+secret = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="TosCheckBox" type="CheckBox" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "I agree with TikTakToe ToS"
+alignment = 1
+
+[node name="SignUpButton" type="Button" parent="VBoxContainer/SignUpContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = "Create new account"
+script = ExtResource("4_m34b8")
+Scene = "MainScene"
+
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+[connection signal="text_changed" from="VBoxContainer/SignUpContainer/Username" to="." method="OnUsername_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/SignUpContainer/Email" to="." method="OnEmail_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/SignUpContainer/Password" to="." method="OnPassword_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/SignUpContainer/PasswordCheck" to="." method="OnPasswordCheck_text_changed"]
+[connection signal="toggled" from="VBoxContainer/SignUpContainer/TosCheckBox" to="." method="OnTosCheckBox_toggled"]
+[connection signal="pressed" from="VBoxContainer/SignUpContainer/SignUpButton" to="." method="OnSignUpButton_pressed"]
+
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

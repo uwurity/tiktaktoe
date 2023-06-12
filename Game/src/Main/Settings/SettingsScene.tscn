@@ -1,25 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://1f75msbol02"]
+[gd_scene load_steps=6 format=3 uid="uid://ddl4yjn73ewji"]
 
 [ext_resource type="Script" path="res://src/Main/Settings/SettingsScene.cs" id="1_j3qt0"]
-[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_juu3n"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="2_olpsb"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="3_wiaio"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="4_b48c3"]
 
-[node name="SettingsScene" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dp1ov"]
+blend_mode = 3
+
+[node name="SettingsScene" type="Node"]
 script = ExtResource("1_j3qt0")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 520.0
-offset_top = 98.0
-offset_right = 650.0
-offset_bottom = 124.0
-text = "Settings scene"
+[node name="BackgroundScene" parent="." instance=ExtResource("2_olpsb")]
 
-[node name="BackButton" type="Button" parent="."]
-offset_left = 49.0
-offset_top = 573.0
-offset_right = 229.0
-offset_bottom = 616.0
-text = "Back"
-script = ExtResource("2_juu3n")
-Scene = "back"
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_dp1ov")
 
-[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("3_wiaio")]
+layout_mode = 2
+
+[node name="SettingsContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/SettingsContainer/MarginContainer" instance=ExtResource("4_b48c3")]
+layout_mode = 2
+text = "Settings"
+
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

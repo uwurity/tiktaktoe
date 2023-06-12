@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://evl3lw8kttc0"]
+
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_3v2p7"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="1_e8j3h"]
+
+[node name="TopBackButton" type="MarginContainer"]
+theme = ExtResource("1_e8j3h")
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 60
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "<  Back"
+script = ExtResource("1_3v2p7")
+Scene = "back"

@@ -1,3 +1,118 @@
-[gd_scene format=3 uid="uid://cvmsbvaqe2gwn"]
+[gd_scene load_steps=10 format=3 uid="uid://dyruiyjxg4d8m"]
 
-[node name="ProfileScene" type="Node2D"]
+[ext_resource type="Script" path="res://src/Main/Profile/ProfileScene.cs" id="1_c0fyh"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="1_oob0l"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="1_scgts"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="3_lf0ud"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="3_qc6ua"]
+[ext_resource type="Texture2D" uid="uid://6e5lomcbn8ah" path="res://icon.svg" id="4_biasg"]
+[ext_resource type="FontFile" uid="uid://cuxiaxhtfhrgw" path="res://assets/fonts/RubikWetPaint-Regular.ttf" id="5_jqojm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_42v83"]
+blend_mode = 3
+
+[sub_resource type="SystemFont" id="SystemFont_im7dl"]
+font_italic = true
+
+[node name="ProfileScene" type="Node" node_paths=PackedStringArray("Avatar", "DisplayName", "Username", "Email", "LogoutButton", "HttpRequest")]
+script = ExtResource("1_c0fyh")
+Avatar = NodePath("VBoxContainer/Avatar")
+DisplayName = NodePath("VBoxContainer/DisplayNameContainer/DisplayName")
+Username = NodePath("VBoxContainer/Username")
+Email = NodePath("VBoxContainer/EmailContainer/Email")
+LogoutButton = NodePath("VBoxContainer/LogoutButton")
+HttpRequest = NodePath("HTTPRequest")
+
+[node name="BackgroundScene" parent="." instance=ExtResource("1_scgts")]
+
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_42v83")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_oob0l")
+theme_override_constants/separation = 15
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("3_lf0ud")]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_biasg")
+
+[node name="Username" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_jqojm")
+theme_override_font_sizes/font_size = 48
+text = "johndoe123"
+
+[node name="DisplayNameContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/DisplayNameContainer"]
+layout_mode = 2
+text = "Your Name:"
+
+[node name="DisplayName" type="Label" parent="VBoxContainer/DisplayNameContainer"]
+layout_mode = 2
+text = "John Doe"
+
+[node name="EmailContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/EmailContainer"]
+layout_mode = 2
+text = "Your Email:"
+
+[node name="Email" type="Label" parent="VBoxContainer/EmailContainer"]
+layout_mode = 2
+text = "example.com"
+
+[node name="ChangePassButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Change Password"
+script = ExtResource("3_qc6ua")
+Scene = "ResetPasswordScene"
+
+[node name="LogoutButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.952941, 0.72549, 0.180392, 1)
+text = "Log out
+"
+script = ExtResource("3_qc6ua")
+Scene = "SignInScene"
+
+[node name="NoticeLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.611765, 0.611765, 0.611765, 1)
+theme_override_fonts/font = SubResource("SystemFont_im7dl")
+text = "For now please contact the TikTakToe administrator if you wish to update these details."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+download_file = "user://avatar.jpg"
+use_threads = true
+
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/ChangePassButton" to="VBoxContainer/ChangePassButton" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/LogoutButton" to="." method="OnLogoutButton_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="OnHttpRequest_request_completed"]
+
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

@@ -2,14 +2,12 @@ export enum Mark {
     X = 0,
     O = 1,
     ADD = 2,
-    EQ = 3,
-    UNDEFINED = -1,
+    EQ = 3
 }
 
 export enum Level {
     CLASSIC = 1,
-    ADVENTURE = 2,
-    UNDEFINED = -1,
+    ADVENTURE = 2
 }
 
 // The complete set of opcodes used for communication between clients and server.
@@ -32,6 +30,8 @@ export enum OpCode {
 	MOVE = 7,
 	// Move was rejected.
 	REJECTED = 8,
+    // Player is ready.
+    READY = 9,
 }
 
 export enum Progress {
@@ -110,12 +110,14 @@ export interface UpdateMessage {
     mark: Mark
     // The deadline time by which the player must submit their move, or forfeit.
     deadline: number
+    // Number of moves taken.
+    moveCount: number
 }
 
 // Complete game round with winner announcement.
 export interface DoneMessage {
     // The move of current player
-    position: BoardPosition
+    position: BoardPosition | null
     // The winner of the game, if any. Unspecified if it's a draw.
     winner: Mark | null
     // Winner board positions, if any. Used to display the row, column, or diagonal that won the game.

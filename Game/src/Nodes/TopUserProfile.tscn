@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuyq8rjgpbcdf"]
+
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="1_j57t6"]
+[ext_resource type="Script" path="res://src/Nodes/TopUserProfile.cs" id="2_m1l7g"]
+[ext_resource type="Texture2D" uid="uid://6e5lomcbn8ah" path="res://icon.svg" id="3_2816j"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="3_w0580"]
+
+[node name="TopUserProfile" type="MarginContainer" node_paths=PackedStringArray("ProfileButton")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -630.0
+offset_bottom = 136.0
+grow_horizontal = 0
+theme = ExtResource("1_j57t6")
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 80
+script = ExtResource("2_m1l7g")
+ProfileButton = NodePath("ProfileButton")
+
+[node name="ProfileButton" type="Button" parent="."]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/h_separation = 25
+text = "Have a great day, {0}!"
+icon = ExtResource("3_2816j")
+flat = true
+alignment = 2
+text_overrun_behavior = 1
+icon_alignment = 2
+expand_icon = true
+script = ExtResource("3_w0580")
+Scene = "ProfileScene"
+
+[connection signal="pressed" from="ProfileButton" to="ProfileButton" method="OnPressed"]

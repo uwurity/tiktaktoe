@@ -1,5 +1,5 @@
 import { inRange } from "lodash";
-import { MatchLabel, State, getRndInclInteger, maxAdventureBoardSize, maxClassicBoardSize, maxCode, minCode, moduleName } from "../handlers";
+import { MatchLabel, State, getRndInclInteger, maxAdventurePlayers, maxClassicBoardSize, maxClassicPlayers, maxCode, maxWinLength, minAdventureBoardSize, minAdventurePlayers, minClassicPlayers, minCode, moduleName } from "../handlers/common";
 import { Level, Mark } from "../messages";
 
 export const id = "create_match";
@@ -22,14 +22,29 @@ export function rpcCreateMatch(ctx: nkruntime.Context, logger: nkruntime.Logger,
         return JSON.stringify({ matchId: null });
     }
 
+    const defaultBoardSize = label.level === Level.CLASSIC ? maxClassicBoardSize : minAdventureBoardSize;
+
+    let size = 0;
+
+    switch (label.level)
+    {
+        case Level.CLASSIC:
+            size = inRange(label.size, minClassicPlayers, maxClassicPlayers) ? label.size : maxClassicPlayers;
+            break;
+        case Level.ADVENTURE:
+            size = inRange(label.size, minAdventurePlayers, maxAdventurePlayers) ? label.size : maxAdventurePlayers;
+            break;
+    }
+
     var finalLabel: MatchLabel = {
         creator: ctx.userId,
         code: Number.isInteger(label.code) && inRange(label.code, minCode, maxCode) ? label.code : getRndInclInteger(minCode, maxCode),
         level: label.level,
         // the match will be closed by default, the host must first join the match in order to open the match to everyone.
         open: 0,
-        winLength: label.winLength,
-        boardSize: label.boardSize ?? (label.level === Level.CLASSIC ? maxClassicBoardSize : maxAdventureBoardSize),
+        winLength: label.winLength ?? maxWinLength,
+        boardSize: label.boardSize ?? defaultBoardSize,
+        size,
     };
 
     var state: State = {
@@ -39,15 +54,15 @@ export function rpcCreateMatch(ctx: nkruntime.Context, logger: nkruntime.Logger,
         presences: {},
         joinsInProgress: 0,
         playing: false,
-        size: { row: 0, col: 0 },
         board: [],
         moveCount: 0,
         marks: {},
-        mark: Mark.UNDEFINED,
+        mark: Mark.X,
         deadlineRemainingTicks: 0,
         winner: null,
         winnerPositions: null,
         nextGameRemainingTicks: 0,
+        ready: [],
     };
 
     var matchId = nk.matchCreate(moduleName, state);

@@ -1,53 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0ayut2t7flri"]
+[gd_scene load_steps=8 format=3 uid="uid://di7ic873hanp"]
 
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_ohk3p"]
 [ext_resource type="Script" path="res://src/Main/Lobby/LobbyScene.cs" id="1_uxm4b"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="2_1e4pg"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="3_h2nyv"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="4_88phv"]
+[ext_resource type="PackedScene" uid="uid://djxeh2v3idor3" path="res://src/Nodes/PresenceContainer.tscn" id="6_tmly0"]
 
-[node name="LobbyScene" type="Node2D" node_paths=PackedStringArray("JoinCode", "BackButton", "DemoPlayButton")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vbn0x"]
+blend_mode = 3
+
+[node name="LobbyScene" type="Node" node_paths=PackedStringArray("Title", "StateLabel", "PresenceContainer", "BackButton", "PlayButton")]
 script = ExtResource("1_uxm4b")
-JoinCode = NodePath("JoinCode")
-BackButton = NodePath("BackButton")
-DemoPlayButton = NodePath("DemoPlayButton")
+Title = NodePath("VBoxContainer/MarginContainer/VBoxContainer/Title")
+StateLabel = NodePath("VBoxContainer/MarginContainer/VBoxContainer/StateLabel")
+PresenceContainer = NodePath("VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/PresenceContainer")
+BackButton = NodePath("VBoxContainer/TopBackButton/BackButton")
+PlayButton = NodePath("PlayButton")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 537.0
-offset_top = 95.0
-offset_right = 610.0
-offset_bottom = 121.0
-text = "Join Code"
+[node name="BackgroundScene" parent="." instance=ExtResource("2_1e4pg")]
 
-[node name="JoinCode" type="Label" parent="."]
-offset_left = 544.0
-offset_top = 129.0
-offset_right = 599.0
-offset_bottom = 155.0
-text = "000000"
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_vbn0x")
 
-[node name="State" type="Label" parent="."]
-offset_left = 444.0
-offset_top = 505.0
-offset_right = 704.0
-offset_bottom = 561.0
-text = "Waiting for players (1/4)"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="BackButton" type="Button" parent="."]
-offset_left = 32.0
-offset_top = 590.0
-offset_right = 151.0
-offset_bottom = 624.0
-text = "Back"
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("3_h2nyv")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_88phv")]
+layout_mode = 2
+text = "Room #{0}"
+
+[node name="StateLabel" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Waiting for players... {0} out of {1} joined."
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 50
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(325, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer2/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="PresenceContainer" parent="VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer" instance=ExtResource("6_tmly0")]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="."]
+visible = false
+offset_right = 84.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 38
+text = "Play"
 script = ExtResource("1_ohk3p")
-Scene = "back"
+Scene = "PlayScene"
 
-[node name="DemoPlayButton" type="Button" parent="."]
-offset_left = 938.0
-offset_top = 576.0
-offset_right = 1112.0
-offset_bottom = 613.0
-text = "(Demo) Go to Play"
-script = ExtResource("1_ohk3p")
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="." method="OnBackButton_pressed"]
 
-[connection signal="pressed" from="BackButton" to="." method="OnBackButton_pressed"]
-[connection signal="pressed" from="DemoPlayButton" to="." method="OnDemoPlayButton_pressed"]
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

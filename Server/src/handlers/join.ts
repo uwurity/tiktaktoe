@@ -1,7 +1,7 @@
-import { State, maxPlayers, msecToSec, tickRate } from ".";
+import { State, getMaxPlayers, msecToSec, tickRate } from "./common";
 import { DoneMessage, LeaveLobbyMessage, OpCode, RejoinMessage } from "../messages";
 
-export let matchJoin: nkruntime.MatchJoinFunction<State> = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: State, presences: nkruntime.Presence[]) {
+export const matchJoin: nkruntime.MatchJoinFunction<State> = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: State, presences: nkruntime.Presence[]) {
     const t = msecToSec(Date.now());
 
     for (const presence of presences) {
@@ -37,13 +37,13 @@ export let matchJoin: nkruntime.MatchJoinFunction<State> = function(ctx: nkrunti
     }
 
     // Check if match was open to new players, but should now be closed.
-    if (Object.keys(state.presences).length === maxPlayers && state.label.open === 1) {
+    if (Object.keys(state.presences).length === getMaxPlayers(state.label.level) && state.label.open === 1) {
         state.label.open = 0;
         const labelJSON = JSON.stringify(state.label);
         dispatcher.matchLabelUpdate(labelJSON);
 
         // Notify players to leave the lobby
-        logger.info("starting to leave lobby: %s", ctx.matchId);
+        logger.info("Starting to leave lobby: %s", ctx.matchId);
         let leaveLobbyMsg: LeaveLobbyMessage = {}
         dispatcher.broadcastMessage(OpCode.LEAVE_LOBBY, JSON.stringify(leaveLobbyMsg));
     }

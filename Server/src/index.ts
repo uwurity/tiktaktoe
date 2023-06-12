@@ -1,10 +1,19 @@
-import handlers, { moduleName } from "./handlers";
-import rpcCreateMatch from "./rpcs/createMatch";
+import { matchInit } from "./handlers/init";
+import { matchJoin } from "./handlers/join";
+import { matchJoinAttempt } from "./handlers/joinAttempt";
+import { matchLeave } from "./handlers/leave";
+import { matchLoop } from "./handlers/loop";
+import { matchSignal } from "./handlers/signal";
+import { matchTerminate } from "./handlers/terminate";
+import { moduleName } from "./handlers/common";
+import createMatch, { rpcCreateMatch } from "./rpcs/createMatch";
 
 function InitModule(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, initializer: nkruntime.Initializer) {
-    initializer.registerRpc(rpcCreateMatch.id, rpcCreateMatch.rpc);
+    initializer.registerRpc(createMatch.id, rpcCreateMatch);
 
-    initializer.registerMatch(moduleName, handlers);
+    initializer.registerMatch(moduleName, {
+        matchInit, matchJoin, matchJoinAttempt, matchLeave, matchLoop, matchSignal, matchTerminate
+    });
 
     logger.info("TypeScript module loaded.");
 }

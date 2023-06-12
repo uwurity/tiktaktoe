@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq5iuw7ky73hn"]
+
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="1_ioyhh"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="2_i2q0a"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="3_j6cxp"]
+[ext_resource type="FontFile" uid="uid://cuxiaxhtfhrgw" path="res://assets/fonts/RubikWetPaint-Regular.ttf" id="3_vskpm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_plw3x"]
+blend_mode = 3
+
+[node name="AfterCreditScene" type="Node"]
+
+[node name="BackgroundScene" parent="." instance=ExtResource("1_ioyhh")]
+
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_plw3x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("2_i2q0a")]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_j6cxp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="GameLabel" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.615686, 0.0823529, 1)
+theme_override_fonts/font = ExtResource("3_vskpm")
+theme_override_font_sizes/font_size = 48
+text = "TikTakToe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thank you for playing our game!
+
+We are Group 3, and we are:
+Phan Van Do - 21520722
+Pham Thieu Gia Khang - 21520967
+Ngo Khanh Trinh - 21522716
+Phan Ba Cuong - 21521907
+
+We hope you have had a great experience with our game, and hope you can give us some comments and feedbacks. Hopefully we'll fix the game ;D
+The most sincere thanks for the efforts of the team members to make TikTakToe!
+
+Stay tuned for updates (that will never happen) and new releases (that will never ever happen) from our team. See you soon!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_direction = 3
+
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Source code available at https://github.com/uwurity/tiktaktoe"
+uri = "https://github.com/uwurity/tiktaktoe"
+
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

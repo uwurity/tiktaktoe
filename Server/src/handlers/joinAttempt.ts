@@ -1,6 +1,6 @@
-import { State, connectedPlayers, maxPlayers } from ".";
+import { State, connectedPlayers, getMaxPlayers } from "./common";
 
-export let matchJoinAttempt: nkruntime.MatchJoinAttemptFunction<State> = function (ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: State, presence: nkruntime.Presence, metadata: {[key: string]: any}) {
+export const matchJoinAttempt: nkruntime.MatchJoinAttemptFunction<State> = function (ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: State, presence: nkruntime.Presence, metadata: {[key: string]: any}) {
     if (!state.label.open)
     {
         if (presence.userId !== state.label.creator)
@@ -9,7 +9,7 @@ export let matchJoinAttempt: nkruntime.MatchJoinAttemptFunction<State> = functio
             return {
                 state,
                 accept: false,
-                rejectMessage: "this room is not open"
+                rejectMessage: "closed",
             };
         }
         // the host has joined, open the room for everyone else
@@ -19,7 +19,7 @@ export let matchJoinAttempt: nkruntime.MatchJoinAttemptFunction<State> = functio
 
     // Check if it's a user attempting to rejoin after a disconnect.
     if (presence.userId in state.presences) {
-        if (state.presences[presence.userId] === null && state.marks[presence.userId].value !== null) {
+        if (state.presences[presence.userId] === null) {
             // User rejoining after a disconnect.
             logger.info("Player %s is rejoining match %s", presence.userId, ctx.matchId);
             state.joinsInProgress++;
@@ -32,17 +32,17 @@ export let matchJoinAttempt: nkruntime.MatchJoinAttemptFunction<State> = functio
             return {
                 state: state,
                 accept: false,
-                rejectMessage: 'already joined',
+                rejectMessage: "already joined",
             }
         }
     }
 
     // Check if match is full.
-    if (connectedPlayers(state) + state.joinsInProgress >= maxPlayers) {
+    if (connectedPlayers(state) + state.joinsInProgress >= getMaxPlayers(state.label.level)) {
         return {
             state: state,
             accept: false,
-            rejectMessage: 'match full',
+            rejectMessage: "match full",
         };
     }
 

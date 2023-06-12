@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://sprsbc7w8my2"]
+
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="1_i5n1k"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="2_a83jh"]
+[ext_resource type="PackedScene" uid="uid://bvpk0afxmutlm" path="res://src/Nodes/Presence.tscn" id="3_0grvu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e6vtu"]
+blend_mode = 3
+
+[node name="WinnerScene" type="Node"]
+
+[node name="BackgroundScene" parent="." instance=ExtResource("1_i5n1k")]
+
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_e6vtu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_a83jh")]
+layout_mode = 2
+text = "Game Over"
+
+[node name="StateLabel" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Better luck next time..."
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(325, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 10
+
+[node name="HFlowContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="Presence" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence2" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence3" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence4" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence5" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence6" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence7" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="Presence8" parent="VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("3_0grvu")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Return to main menu >"
+
+[editable path="BackgroundScene"]

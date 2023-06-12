@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvpk0afxmutlm"]
+
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="1_nwqsx"]
+[ext_resource type="Texture2D" uid="uid://6e5lomcbn8ah" path="res://icon.svg" id="2_wjk3e"]
+[ext_resource type="Script" path="res://src/Nodes/Presence.cs" id="3_kg58r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbivj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2una"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oihx"]
+content_margin_left = 10.0
+bg_color = Color(0.588235, 0.65098, 0.956863, 1)
+border_width_left = 8
+border_width_top = 8
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[node name="Presence" type="Button" node_paths=PackedStringArray("StateIcon")]
+custom_minimum_size = Vector2(300, 60)
+theme = ExtResource("1_nwqsx")
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_constants/h_separation = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_fbivj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v2una")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1oihx")
+text = "{0}
+{1}"
+icon = ExtResource("2_wjk3e")
+alignment = 0
+text_overrun_behavior = 1
+clip_text = true
+expand_icon = true
+script = ExtResource("3_kg58r")
+StateIcon = NodePath("StateIcon")
+
+[node name="StateIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2

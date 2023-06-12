@@ -1,30 +1,21 @@
 using Chickensoft.GoDotNet;
 using Godot;
 using tiktaktoe.Autoload;
-using tiktaktoe.Main.JoinRoom;
-using tiktaktoe.Main.Lobby;
-using tiktaktoe.Utils;
+using tiktaktoe.Messages;
 
 namespace tiktaktoe.Main.Classic;
 
-public partial class ClassicScene : Node2D
+public partial class ClassicScene : Node
 {
-	[Export] public SceneHandler PvpButton { get; set; } = null!;
-	
-	private MatchState MatchState => this.Autoload<MatchState>();
-	
-	public override void _Ready()
-	{
-		MatchState.Level = nameof(ClassicScene);
-	}
+    private MatchState MatchState => this.Autoload<MatchState>();
 
-	public override void _Process(double delta)
-	{
-	}
-	
-	private void OnPvpButton_pressed()
-	{
-		// TODO: check if logged in
-		PvpButton.OnPressed();
-	}
+    public override void _Ready()
+    {
+        MatchState.Label.Level = Level.Classic;
+        MatchState.Label.BoardSize = new() { Row = 5, Col = 5 };
+    }
+
+    public override void _Process(double delta)
+    {
+    }
 }

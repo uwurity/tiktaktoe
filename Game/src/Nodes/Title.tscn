@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bybveg15i86j2"]
+
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="1_e3o26"]
+[ext_resource type="FontFile" uid="uid://cuxiaxhtfhrgw" path="res://assets/fonts/RubikWetPaint-Regular.ttf" id="2_i1wce"]
+
+[node name="Title" type="Label"]
+theme = ExtResource("1_e3o26")
+theme_override_colors/font_color = Color(0.878431, 0.615686, 0.0823529, 1)
+theme_override_fonts/font = ExtResource("2_i1wce")
+theme_override_font_sizes/font_size = 60
+text = "TikTakToe"
+horizontal_alignment = 1
+vertical_alignment = 1
