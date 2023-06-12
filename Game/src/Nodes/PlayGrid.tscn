@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://brf7qkv3huwld"]
+
+[ext_resource type="Script" path="res://src/Nodes/PlayGrid.cs" id="1_b4t3e"]
+[ext_resource type="PackedScene" uid="uid://c21cx0wtim44j" path="res://src/Nodes/Player.tscn" id="1_nbffh"]
+
+[node name="PlayGrid" type="GridContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 5
+script = ExtResource("1_b4t3e")
+Player = ExtResource("1_nbffh")
+
+[node name="Player" parent="." instance=ExtResource("1_nbffh")]
+layout_mode = 2

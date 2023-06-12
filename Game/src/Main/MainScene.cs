@@ -1,30 +1,14 @@
-using Chickensoft.GoDotNet;
 using Godot;
-using tiktaktoe.Autoload;
-using tiktaktoe.Main.Adventure;
-using tiktaktoe.Main.JoinRoom;
-using tiktaktoe.Utils;
 
 namespace tiktaktoe.Main;
 
-public partial class MainScene : Node2D
+public partial class MainScene : Node
 {
-	[Export] public SceneHandler AdventureButton { get; set; } = null!;
+    public override void _Ready()
+    {
+    }
 
-	private MatchState MatchState => this.Autoload<MatchState>();
-
-	public override void _Ready()
-	{
-	}
-
-	public override void _Process(double delta)
-	{
-	}
-	
-	private void OnAdventureButton_pressed()
-	{
-		// TODO: check if logged in
-		MatchState.Level = nameof(AdventureScene);
-		AdventureButton.OnPressed();
-	}
+    public override void _Process(double delta)
+    {
+    }
 }

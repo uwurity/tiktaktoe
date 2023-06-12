@@ -1,0 +1,28 @@
+<Project Sdk="Godot.NET.Sdk/4.0.2">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>tiktaktoe</RootNamespace>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>.generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AllProjects Include="**/*.tscn" />
+    <AllProjects Include="**/*.godot" />
+    <AllProjects Include="**/*.gd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chickensoft.GoDotLog" Version="1.1.2" />
+    <PackageReference Include="Chickensoft.GoDotNet" Version="1.5.3" />
+    <PackageReference Include="Chickensoft.SuperNodes" Version="1.2.1" PrivateAssets="all" OutputItemType="analyzer" />
+    <PackageReference Include="Chickensoft.SuperNodes.Types" Version="1.2.1" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.39.0" />
+    <PackageReference Include="DebounceThrottle" Version="2.0.0" />
+    <PackageReference Include="NakamaClient" Version="3.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>

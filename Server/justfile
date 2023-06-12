@@ -8,7 +8,7 @@ build: type-check
 
 start:
     nakama migrate up --database.address postgres:localdb@localhost:5432
-    nakama --runtime.js_entrypoint ./index.js --database.address postgres:localdb@localhost:5432
+    nakama --runtime.js_entrypoint ./index.js --database.address postgres:localdb@localhost:5432 --logger.level DEBUG
 
 watch:
     watchexec -r -e ts -- just build

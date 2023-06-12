@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://6kd2cwq18puq"]
+[gd_scene load_steps=3 format=3 uid="uid://6kd2cwq18puq"]
 
 [ext_resource type="Script" path="res://src/Main/Loading/LoadingScene.cs" id="1_qyog8"]
+[ext_resource type="Texture2D" uid="uid://87i12q18a3u1" path="res://assets/backgroundf.png" id="2_uba7q"]
 
 [node name="LoadingScene" type="Node2D"]
 script = ExtResource("1_qyog8")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1185, 783)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_uba7q")

@@ -1,12 +1,5 @@
 import { fill, times } from "lodash";
 import { Board, BoardPosition, BoardSize, Level, Mark } from "../messages";
-import { matchInit } from "./init";
-import { matchJoin } from "./join";
-import { matchJoinAttempt } from "./joinAttempt";
-import { matchLeave } from "./leave";
-import { matchLoop } from "./loop";
-import { matchSignal } from "./signal";
-import { matchTerminate } from "./terminate";
 
 export const moduleName = "tiktaktoe";
 export const tickRate = 5;
@@ -23,8 +16,12 @@ export const minCode = 100000;
 export const maxCode = 999999;
 export const maxWinLength = 5;
 export const marks = Object.keys(Mark).filter(key => isNaN(Number(key)) && key !== "UNDEFINED");
-export const maxPlayers = marks.length;
-export const minPlayers = marks.length;
+export const maxClassicPlayers = 2;
+export const minClassicPlayers = 2;
+export const maxAdventurePlayers = marks.length;
+export const minAdventurePlayers = 4;
+export const minPlayers = minClassicPlayers;
+export const maxPlayers = maxAdventurePlayers;
 
 export interface MatchLabel {
     /**
@@ -50,12 +47,15 @@ export interface MatchLabel {
     // Length of winning sequence.
     winLength: number
 
-    // Specify board size
+    // Specify board size.
     boardSize: BoardSize
+
+    // Number of people allowed in the match.
+    size: number
 }
 
 export interface State {
-    // Match label
+    // Match label.
     label: MatchLabel
     // Ticks where no actions have occurred.
     emptyTicks: number
@@ -67,8 +67,6 @@ export interface State {
     joinsInProgress: number
     // True if there's a game currently in progress.
     playing: boolean
-    // Set board size
-    size: BoardSize
     // Current state of the board.
     board: Board
     // Number of moves taken.
@@ -85,6 +83,8 @@ export interface State {
     winnerPositions: BoardPosition[] | null
     // Ticks until the next game starts, if applicable.
     nextGameRemainingTicks: number
+    // List of users who are ready for game.
+    ready: string[] | null,
 }
 
 export function getRndInclInteger(min: number, max: number) {
@@ -108,13 +108,33 @@ export function create2DArray(row: number, col: number): any[][] {
 }
 
 export function connectedPlayers(s: State): number {
-    return Object.keys(s.presences).length;
+    let count = 0;
+    for(const p of Object.keys(s.presences)) {
+        if (s.presences[p] !== null) {
+            count++;
+        }
+    }
+    return count;
 }
 
 export function msecToSec(n: number): number {
     return Math.floor(n / 1000);
 }
 
-const handlers = { matchInit, matchJoin, matchJoinAttempt, matchLeave, matchLoop, matchSignal, matchTerminate };
+export function getMaxPlayers(level: Level) {
+    switch (level)
+    {
+        case Level.CLASSIC: return maxClassicPlayers;
+        case Level.ADVENTURE: return maxAdventurePlayers;
+        default: return maxPlayers;
+    }
+}
 
-export default handlers;
+export function getMinPlayers(level: Level) {
+    switch (level)
+    {
+        case Level.CLASSIC: return minClassicPlayers;
+        case Level.ADVENTURE: return minAdventurePlayers;
+        default: return minPlayers;
+    }
+}

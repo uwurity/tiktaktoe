@@ -1,46 +1,149 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfrhl32yovc7x"]
+[gd_scene load_steps=8 format=3 uid="uid://i1sqk4rcsfs8"]
 
 [ext_resource type="Script" path="res://src/Main/Adventure/AdventureScene.cs" id="1_8v2i6"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="2_6y47j"]
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_oppmj"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="3_4g18w"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="4_1oxdl"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="4_ixwr3"]
 
-[node name="AdventureScene" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d0mn3"]
+blend_mode = 3
+
+[node name="AdventureScene" type="Node"]
 script = ExtResource("1_8v2i6")
 
-[node name="SceneDescription" type="Label" parent="."]
-offset_left = 373.0
-offset_top = 110.0
-offset_right = 789.0
-offset_bottom = 136.0
-text = "Adventure scene"
+[node name="BackgroundScene" parent="." instance=ExtResource("2_6y47j")]
+
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_d0mn3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_1oxdl")
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("3_4g18w")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_ixwr3")]
+layout_mode = 2
+text = "Adventure"
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Customize the match to your liking!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-offset_left = 320.0
-offset_top = 208.0
-offset_right = 834.0
-offset_bottom = 524.0
-text = "Configure an Adventure room here"
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="BoardSizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RowContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/BoardSizeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowsLabel" type="Label" parent="VBoxContainer/VBoxContainer/BoardSizeContainer/RowContainer"]
+layout_mode = 2
+text = "Rows:"
+
+[node name="Rows" type="SpinBox" parent="VBoxContainer/VBoxContainer/BoardSizeContainer/RowContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 15.0
+value = 5.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer/BoardSizeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/BoardSizeContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="."]
-offset_left = 58.0
-offset_top = 574.0
-offset_right = 227.0
-offset_bottom = 614.0
-text = "Back"
-script = ExtResource("2_oppmj")
-Scene = "back"
+[node name="ColContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/BoardSizeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="CreateRoomButton" type="Button" parent="."]
-offset_left = 938.0
-offset_top = 576.0
-offset_right = 1112.0
-offset_bottom = 613.0
-text = "Create Room"
-script = ExtResource("2_oppmj")
-Scene = "LobbyScene"
+[node name="ColsLabel" type="Label" parent="VBoxContainer/VBoxContainer/BoardSizeContainer/ColContainer"]
+layout_mode = 2
+text = "Cols:"
 
-[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]
-[connection signal="pressed" from="CreateRoomButton" to="CreateRoomButton" method="OnPressed"]
+[node name="Cols" type="SpinBox" parent="VBoxContainer/VBoxContainer/BoardSizeContainer/ColContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 15.0
+value = 5.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Difficulty:"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+popup/item_0/text = "Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+popup/item_3/text = "UwU"
+popup/item_3/id = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 60
+
+[node name="FindRoomButton" type="Button" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_1oxdl")
+disabled = true
+text = "Find match  >"
+script = ExtResource("2_oppmj")
+Scene = "JoinRoomScene"
+
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer/BoardSizeContainer/RowContainer/Rows" to="." method="OnRows_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer/BoardSizeContainer/ColContainer/Cols" to="." method="OnCols_value_changed"]
+[connection signal="pressed" from="MarginContainer/FindRoomButton" to="." method="OnFindRoom_button_pressed"]
+
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

@@ -17,12 +17,7 @@
     "lib": [
       "ESNext"
     ],
-    "strict": true,
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ]
+    "strict": true
   },
   "files": [
     "./node_modules/nakama-runtime/index.d.ts"

@@ -1,6 +1,6 @@
-import { State, tickRate } from ".";
+import { State, tickRate } from "./common";
 
-export let matchInit: nkruntime.MatchInitFunction<State> = function (ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, params: {[key: string]: string}) {
+export const matchInit: nkruntime.MatchInitFunction<State> = function (ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, params: {[key: string]: string}) {
     var state = params as unknown as State;
 
     logger.info("Creating a new match: %s for %s", ctx.matchId, state.label.creator);
@@ -8,6 +8,6 @@ export let matchInit: nkruntime.MatchInitFunction<State> = function (ctx: nkrunt
     return {
         state,
         tickRate,
-        label: `+label.code:${state.label.code} label.level:${state.label.level} label.open:${state.label.level} label.creator:${state.label.creator}`,
+        label: JSON.stringify(state.label),
     };
 }

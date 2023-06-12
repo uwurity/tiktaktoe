@@ -1,46 +1,80 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp1iekitxtics"]
+[gd_scene load_steps=8 format=3 uid="uid://dc1kmcegwkg1d"]
 
 [ext_resource type="Script" path="res://src/Main/Classic/ClassicScene.cs" id="1_isyfl"]
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="2_f5lt4"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="2_p5oj6"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="3_cbv36"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="4_djopt"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="5_txsek"]
 
-[node name="ClassicScene" type="Node2D" node_paths=PackedStringArray("PvpButton")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jekrw"]
+blend_mode = 3
+
+[node name="ClassicScene" type="Node"]
 script = ExtResource("1_isyfl")
-PvpButton = NodePath("PvpButton")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 531.0
-offset_top = 104.0
-offset_right = 632.0
-offset_bottom = 130.0
-text = "Classic scene"
+[node name="BackgroundScene" parent="." instance=ExtResource("2_p5oj6")]
 
-[node name="BackButton" type="Button" parent="."]
-offset_left = 63.0
-offset_top = 565.0
-offset_right = 210.0
-offset_bottom = 603.0
-text = "Back"
-script = ExtResource("2_f5lt4")
-Scene = "back"
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_jekrw")
 
-[node name="PveButton" type="Button" parent="."]
-offset_left = 504.0
-offset_top = 175.0
-offset_right = 658.0
-offset_bottom = 209.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("3_cbv36")]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_djopt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("5_txsek")]
+layout_mode = 2
+text = "Classic"
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose between machine v. people"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="PveButton" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 text = "PVE"
 script = ExtResource("2_f5lt4")
-Scene = "ClassicPlayScene"
+Scene = "PlayScene"
 
-[node name="PvpButton" type="Button" parent="."]
-offset_left = 505.0
-offset_top = 236.0
-offset_right = 658.0
-offset_bottom = 268.0
+[node name="PvpButton" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 text = "PVP"
 script = ExtResource("2_f5lt4")
 Scene = "JoinRoomScene"
 
-[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]
-[connection signal="pressed" from="PveButton" to="PveButton" method="OnPressed"]
-[connection signal="pressed" from="PvpButton" to="." method="OnPvpButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/PveButton" to="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/PveButton" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/PvpButton" to="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/PvpButton" method="OnPressed"]
+
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

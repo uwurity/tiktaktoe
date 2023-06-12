@@ -11,8 +11,11 @@ config_version=5
 [application]
 
 config/name="tiktaktoe"
-run/main_scene="res://src/Main/MainScene.tscn"
+run/main_scene="res://src/Main/Profile/SignIn/SignInScene.tscn"
 config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
+boot_splash/image="res://assets/backgroundf.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,6 +25,11 @@ MatchState="*res://src/Autoload/MatchState.cs"
 Online="*res://src/Autoload/Online.cs"
 SceneManager="*res://addons/scene_manager/scene_manager.tscn"
 Scenes="*res://addons/scene_manager/scenes.gd"
+
+[display]
+
+window/bg_color=Color(0.14, 0.14, 0.14, 1)
+window/image=""
 
 [dotnet]
 

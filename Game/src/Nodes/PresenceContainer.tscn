@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://djxeh2v3idor3"]
+
+[ext_resource type="Script" path="res://src/Nodes/PresenceContainer.cs" id="1_j7d3c"]
+[ext_resource type="PackedScene" uid="uid://bvpk0afxmutlm" path="res://src/Nodes/Presence.tscn" id="2_hv80t"]
+
+[node name="PresenceContainer" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+script = ExtResource("1_j7d3c")
+Presence = ExtResource("2_hv80t")
+
+[node name="Presence" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence2" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence3" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence4" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence5" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence6" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence7" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2
+
+[node name="Presence8" parent="." instance=ExtResource("2_hv80t")]
+layout_mode = 2

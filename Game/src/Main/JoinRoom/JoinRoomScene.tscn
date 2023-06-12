@@ -1,61 +1,85 @@
-[gd_scene load_steps=3 format=3 uid="uid://bv3k8eyn1ullw"]
+[gd_scene load_steps=8 format=3 uid="uid://s451s0xmaohx"]
 
 [ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="1_uxg8b"]
 [ext_resource type="Script" path="res://src/Main/JoinRoom/JoinRoomScene.cs" id="1_yiy2t"]
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="2_shouk"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="3_6qlgj"]
+[ext_resource type="PackedScene" uid="uid://evl3lw8kttc0" path="res://src/Nodes/TopBackButton.tscn" id="4_0f2te"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="5_ke57m"]
 
-[node name="JoinRoomScene" type="Node2D" node_paths=PackedStringArray("MatchDescription", "JoinButton", "JoinCode")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2wf4"]
+blend_mode = 3
+
+[node name="JoinRoomScene" type="Node" node_paths=PackedStringArray("Title", "JoinButton", "JoinCode")]
 script = ExtResource("1_yiy2t")
-MatchDescription = NodePath("MatchDescription")
-JoinButton = NodePath("JoinButton")
-JoinCode = NodePath("JoinCode")
+Title = NodePath("VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer/Title")
+JoinButton = NodePath("VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/JoinButton")
+JoinCode = NodePath("VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/JoinCode")
 
-[node name="MatchDescription" type="Label" parent="."]
-offset_left = 343.0
-offset_top = 99.0
-offset_right = 849.0
-offset_bottom = 130.0
-text = "Join Room"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="BackgroundScene" parent="." instance=ExtResource("2_shouk")]
 
-[node name="Label" type="Label" parent="."]
-offset_left = 464.0
-offset_top = 167.0
-offset_right = 724.0
-offset_bottom = 220.0
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_j2wf4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBackButton" parent="VBoxContainer" instance=ExtResource("4_0f2te")]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_6qlgj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("5_ke57m")]
+layout_mode = 2
+text = "Level"
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Join or create a room"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="JoinCode" type="SpinBox" parent="."]
-offset_left = 489.0
-offset_top = 244.0
-offset_right = 708.0
-offset_bottom = 283.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 15
+
+[node name="JoinCode" type="SpinBox" parent="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 min_value = 100000.0
 max_value = 999999.0
 value = 100000.0
 alignment = 1
 update_on_text_changed = true
 
-[node name="JoinButton" type="Button" parent="."]
-offset_left = 550.0
-offset_top = 318.0
-offset_right = 631.0
-offset_bottom = 350.0
+[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
 text = "Join"
 script = ExtResource("1_uxg8b")
 Scene = "LobbyScene"
 
-[node name="BackButton" type="Button" parent="."]
-offset_left = 51.0
-offset_top = 585.0
-offset_right = 189.0
-offset_bottom = 619.0
-text = "Back"
-script = ExtResource("1_uxg8b")
-Scene = "back"
+[connection signal="pressed" from="VBoxContainer/TopBackButton/BackButton" to="VBoxContainer/TopBackButton/BackButton" method="OnPressed"]
+[connection signal="value_changed" from="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/JoinCode" to="." method="OnJoinCode_value_changed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/VBoxContainer/JoinButton" to="." method="OnJoinButton_pressed"]
 
-[connection signal="value_changed" from="JoinCode" to="." method="OnJoinCode_value_changed"]
-[connection signal="pressed" from="JoinButton" to="." method="OnJoinButton_pressed"]
-[connection signal="pressed" from="BackButton" to="BackButton" method="OnPressed"]
+[editable path="BackgroundScene"]
+[editable path="VBoxContainer/TopBackButton"]

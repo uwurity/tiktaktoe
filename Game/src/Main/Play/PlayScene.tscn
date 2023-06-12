@@ -1,0 +1,152 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddcex3y8nnkkk"]
+
+[ext_resource type="PackedScene" uid="uid://bvlwpvk1gjcuw" path="res://src/Nodes/BackgroundScene.tscn" id="1_0bv2d"]
+[ext_resource type="Script" path="res://src/Main/Play/PlayScene.cs" id="1_tvrjw"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="2_jj6mc"]
+[ext_resource type="PackedScene" uid="uid://brf7qkv3huwld" path="res://src/Nodes/PlayGrid.tscn" id="3_7qmsg"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="3_terpo"]
+[ext_resource type="PackedScene" uid="uid://djxeh2v3idor3" path="res://src/Nodes/PresenceContainer.tscn" id="5_jdfia"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_grpll"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_7op8q"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.878431, 0.615686, 0.0823529, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_imew6"]
+gradient = SubResource("Gradient_7op8q")
+width = 350
+
+[node name="PlayScene" type="Node" node_paths=PackedStringArray("PlayGrid", "OccupiedLabel", "Title", "PresenceContainer", "BackButton", "ChannelMessages", "Message")]
+script = ExtResource("1_tvrjw")
+PlayGrid = NodePath("VBoxContainer/HSplitContainer/VBoxContainer/MarginContainer/PlayGrid")
+OccupiedLabel = NodePath("VBoxContainer/MarginContainer/CenterContainer/OccupiedLabel")
+Title = NodePath("VBoxContainer/HSplitContainer/VBoxContainer/Title")
+PresenceContainer = NodePath("VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/PresenceContainer")
+BackButton = NodePath("VBoxContainer/MarginContainer/HBoxContainer/BackButton")
+ChannelMessages = NodePath("VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/VBoxContainer/ChannelMessages")
+Message = NodePath("VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/VBoxContainer/Message")
+
+[node name="BackgroundScene" parent="." instance=ExtResource("1_0bv2d")]
+
+[node name="Background" parent="BackgroundScene/Node" index="0"]
+material = SubResource("CanvasItemMaterial_grpll")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "< Leave match"
+script = ExtResource("3_terpo")
+Scene = "MainScene"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="OccupiedLabel" type="Label" parent="VBoxContainer/MarginContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+text = "Occupied: {0}/{1}"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" parent="VBoxContainer/HSplitContainer/VBoxContainer" instance=ExtResource("2_jj6mc")]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Game State"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayGrid" parent="VBoxContainer/HSplitContainer/VBoxContainer/MarginContainer" instance=ExtResource("3_7qmsg")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("GradientTexture1D_imew6")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer" instance=ExtResource("2_jj6mc")]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.196078, 0.341176, 0.458824, 1)
+theme_override_font_sizes/font_size = 32
+text = "Match Info"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(320, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="PresenceContainer" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer" instance=ExtResource("5_jdfia")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChannelMessages" type="TextEdit" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "The chat is empty"
+editable = false
+deselect_on_focus_loss_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="Message" type="LineEdit" parent="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Say something"
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="OnBackButton_pressed"]
+[connection signal="text_submitted" from="VBoxContainer/HSplitContainer/TextureRect/MarginContainer/VBoxContainer/VBoxContainer/Message" to="." method="OnMessage_text_submitted"]
+
+[editable path="BackgroundScene"]

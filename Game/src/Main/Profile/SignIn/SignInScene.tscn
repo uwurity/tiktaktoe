@@ -1,3 +1,147 @@
-[gd_scene format=3 uid="uid://bucun8l0jgd0w"]
+[gd_scene load_steps=10 format=3 uid="uid://c30u5p8kf4m6e"]
 
-[node name="SignInScene" type="Node2D"]
+[ext_resource type="Script" path="res://src/Main/Profile/SignIn/SignInScene.cs" id="1_2hi82"]
+[ext_resource type="Theme" uid="uid://doohvd2x8fvm5" path="res://assets/themes/tiktaktoe.tres" id="2_dgwxb"]
+[ext_resource type="PackedScene" uid="uid://bybveg15i86j2" path="res://src/Nodes/Title.tscn" id="3_vfyew"]
+[ext_resource type="Script" path="res://src/Utils/SceneHandler.cs" id="4_ipj11"]
+[ext_resource type="Texture2D" uid="uid://dmrmar7vb0t3i" path="res://assets/background.png" id="4_y81sb"]
+
+[sub_resource type="Gradient" id="Gradient_xwd5q"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.14902, 0.14902, 0.14902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pepxn"]
+gradient = SubResource("Gradient_xwd5q")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qq5t"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ukb0"]
+bg_color = Color(0.878431, 0.615686, 0.0823529, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="SignInScene" type="Node" node_paths=PackedStringArray("Username", "Password", "LoginButton", "SignUpButton", "ForgotButton")]
+script = ExtResource("1_2hi82")
+Username = NodePath("HSplitContainer/LoginBackground/MarginContainer/LoginContainer/Username")
+Password = NodePath("HSplitContainer/LoginBackground/MarginContainer/LoginContainer/Password")
+LoginButton = NodePath("HSplitContainer/LoginBackground/MarginContainer/LoginContainer/LoginButton")
+SignUpButton = NodePath("HSplitContainer/LoginBackground/MarginContainer/LoginContainer/SignUpButton")
+ForgotButton = NodePath("HSplitContainer/LoginBackground/MarginContainer/LoginContainer/ForgotButton")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 430
+dragger_visibility = 1
+
+[node name="LoginBackground" type="TextureRect" parent="HSplitContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_pepxn")
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/LoginBackground"]
+layout_mode = 2
+offset_right = 430.0
+offset_bottom = 648.0
+theme = ExtResource("2_dgwxb")
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="LoginContainer" type="VBoxContainer" parent="HSplitContainer/LoginBackground/MarginContainer"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+alignment = 1
+
+[node name="Title" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer" instance=ExtResource("3_vfyew")]
+layout_mode = 2
+
+[node name="UsernameLabel" type="Label" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Username"
+
+[node name="Username" type="LineEdit" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="PasswordLabel" type="Label" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Password"
+
+[node name="Password" type="LineEdit" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+secret = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="LoginButton" type="Button" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Sign In"
+expand_icon = true
+script = ExtResource("4_ipj11")
+Scene = "MainScene"
+
+[node name="ForgotButton" type="Button" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.760784, 0.603922, 0.317647, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_4qq5t")
+text = "Forgot password?"
+script = ExtResource("4_ipj11")
+Scene = "ResetPasswordScene"
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Separator" type="Button" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6ukb0")
+disabled = true
+button_mask = 0
+
+[node name="SignUpButton" type="Button" parent="HSplitContainer/LoginBackground/MarginContainer/LoginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Create new account"
+expand_icon = true
+script = ExtResource("4_ipj11")
+Scene = "SignUpScene"
+
+[node name="AboutUsButton" type="Button" parent="HSplitContainer/LoginBackground/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "About us"
+script = ExtResource("4_ipj11")
+Scene = "CreditScene"
+
+[node name="TextureRect" type="TextureRect" parent="HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("4_y81sb")
+expand_mode = 5
+stretch_mode = 6
+
+[connection signal="text_changed" from="HSplitContainer/LoginBackground/MarginContainer/LoginContainer/Username" to="." method="OnUsername_text_changed"]
+[connection signal="text_changed" from="HSplitContainer/LoginBackground/MarginContainer/LoginContainer/Password" to="." method="OnPassword_text_changed"]
+[connection signal="pressed" from="HSplitContainer/LoginBackground/MarginContainer/LoginContainer/LoginButton" to="." method="OnLoginButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/LoginBackground/MarginContainer/LoginContainer/ForgotButton" to="." method="OnForgotButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/LoginBackground/MarginContainer/LoginContainer/SignUpButton" to="." method="OnSignUpButton_pressed"]
+[connection signal="pressed" from="HSplitContainer/LoginBackground/MarginContainer/AboutUsButton" to="HSplitContainer/LoginBackground/MarginContainer/AboutUsButton" method="OnPressed"]
