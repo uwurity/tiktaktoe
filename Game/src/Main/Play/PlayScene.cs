@@ -44,6 +44,7 @@ public partial class PlayScene : Node
 		PlayGrid.Row = MatchState.Label.BoardSize.Row;
 		PlayGrid.Col = MatchState.Label.BoardSize.Col;
 		_totalGrid = PlayGrid.Row * PlayGrid.Col;
+		PlayGrid.Columns = PlayGrid.Col;
 		OccupiedLabel.Text = string.Format(_occupiedFormat, 0, _totalGrid);
 		await Online.Socket.SendMatchStateAsync(MatchState.MatchId, (long)OpCode.Ready, "");
 		_channel = await Online.Socket.JoinChatAsync(MatchState.Label.Code.ToString(), ChannelType.Room,
