@@ -10,8 +10,8 @@ namespace tiktaktoe.Main.Adventure;
 
 public partial class AdventureScene : Node
 {
-	private bool _validRows;
-	private bool _validCols;
+	private bool ValidRows => Rows.Value is >= 5 and <= 15;
+	private bool ValidCols => Cols.Value is >= 5 and <= 15;
 	private DebounceDispatcher _rowsAction = null!;
 	private DebounceDispatcher _colsAction = null!;
 
@@ -28,6 +28,7 @@ public partial class AdventureScene : Node
 		MatchState.Label.Level = Level.Adventure;
 		_rowsAction = new(300);
 		_colsAction = new(300);
+		TryEnableFindMatchButton();
 	}
 
 	public override void _Process(double delta)
@@ -35,26 +36,14 @@ public partial class AdventureScene : Node
 	}
 
 	private void OnRows_value_changed(double value)
-	{
-		_rowsAction.Debounce(() =>
-		{
-			_validRows = value is >= 5 and <= 15;
-			TryEnableFindMatchButton();
-		});
-	}
+		=> _rowsAction.Debounce(TryEnableFindMatchButton);
 
 
 	private void OnCols_value_changed(double value)
-	{
-		_colsAction.Debounce(() =>
-		{
-			_validCols = value is >= 5 and <= 15;
-			TryEnableFindMatchButton();
-		});
-	}
+		=> _colsAction.Debounce(TryEnableFindMatchButton);
 
 	private void TryEnableFindMatchButton()
-		=> FindRoomButton.Disabled = !(_validRows && _validCols);
+		=> FindRoomButton.Disabled = !(ValidRows && ValidCols);
 
 	private void OnFindRoom_button_pressed()
 	{
