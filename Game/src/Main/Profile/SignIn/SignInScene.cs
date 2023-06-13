@@ -30,7 +30,6 @@ public partial class SignInScene : Node
 	public override void _Ready()
 	{
 		base._Ready();
-		TryEnableLoginButton();
 		_usernameAction = new(500);
 		_passwordAction = new(500);
 		Online.SessionConnected += OnSessionConnected;
@@ -91,6 +90,7 @@ public partial class SignInScene : Node
 				16 => "Invalid credentials",
 				_ => e.Message
 			});
+			OnSessionChanged(null);
 		}
 		catch (Exception)
 		{
