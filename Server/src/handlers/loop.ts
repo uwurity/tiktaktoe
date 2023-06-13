@@ -1,6 +1,6 @@
 import { State, calculateDeadlineTicks, connectedPlayers, create2DArray, delaybetweenGamesSec, getMaxPlayers, marks, maxEmptySec, msecToSec, tickRate } from "./common";
 import { Board, BoardPosition, DoneMessage, Mark, Message, MoveMessage, OpCode, Progress, StartMessage, UpdateMessage } from "../messages";
-import { last, merge, shuffle, take } from "lodash";
+import { inRange, last, merge, shuffle, take } from "lodash";
 
 export const matchLoop: nkruntime.MatchLoopFunction<State> = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: State, messages: nkruntime.MatchMessage[]) {
     logger.debug("Running match loop for match: %s. Tick: %d", ctx.matchId, tick);
@@ -89,7 +89,8 @@ let handleMove = function(message: nkruntime.MatchMessage, ctx: nkruntime.Contex
         logger.debug("Bad data received: %s from user: %s", error);
         return;
     }
-    if (s.board[msg.position.row][msg.position.col]) {
+    if (!inRange(msg.position.row, 0, s.label.boardSize.row) || !inRange(msg.position.col, 0, s.label.boardSize.col)
+    || s.board[msg.position.row][msg.position.col] !== null) {
         // Client sent a position outside the board, or one that has already been played.
         dispatcher.broadcastMessage(OpCode.REJECTED, null, [message.sender]);
         return;
