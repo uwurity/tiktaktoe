@@ -8,7 +8,7 @@ This is a team effort of Group 3 from class NT106.N21.MMCL, managed by Ms. Le Mi
 - Pham Thieu Gia Khang (21520967): [meowbruhth]
 - Phan Ba Cuong (21521907): [bbbboooyyy]
 
-This project uses the [Nakama project template][nakama-project-template] and is licensed under the LGPLv3 license.
+This project uses the [Nakama project template][nakama-project-template] and is licensed under the AGPLv3 license.
 
 [nakama-project-template]: https://github.com/heroiclabs/nakama-project-template/
 [hoilmk@uit.edu.vn]: hoilmk@uit.edu.vn
